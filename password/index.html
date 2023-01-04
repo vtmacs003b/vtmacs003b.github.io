@@ -18,14 +18,15 @@
 		<meta property="og:locale" content="ja_JP">
 		<meta property="og:site_name" content="パスワードチェッカー">
 		<meta property="og:url" content="https://vtmacs003b.github.io/password/">
-		<meta property="og:image" content="https://vtmacs003b.github.io/password/raspi_dojo.png">
+		<meta property="og:image" content="https://vtmacs003b.github.io/password/password.png">
 		<meta property="og:description" content="パスワードをチェックできるサイトです。">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" integrity="sha384-l4UPAMHGzl7zwogLW4nOwaU2XTk6oiM1jhCRQstZEndoIiA2I5bg6fST3wzBSRBD" crossorigin="anonymous">
 
 	</head>
 	<body>
 	<header>
-	<nav class="navbar sticky-top navbar-expand-lg" style="background-color: #e3f2fd;">
+	<nav class="navbar fixed-top navbar-expand-lg" style="background-color: #e3f2fd;">
 		<div class="container-fluid">
 			<a href="/maebashi.jp/" class="navbar-brand">
 			<img src="../favicon.png" width="25" height="25" class="d-inline-block align-top" alt="M">
@@ -35,9 +36,9 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbar-header">
 				<ul class="navbar-nav">
-				<li class="nav-item"><a href="#words" class="nav-link">使える文字</a></li>
-				<li class="nav-item"><a href="#time" class="nav-link">組み合わせと解読時間</a></li>
-				<li class="nav-item"><a href="#check" class="nav-link">パスワードチェック</a></li>
+				<li class="nav-item"><a href="#words" class="nav-link"><i class="bi bi-key"></i>使える文字</a></li>
+				<li class="nav-item"><a href="#time" class="nav-link"><i class="bi bi-stopwatch"></i>組み合わせと解読時間</a></li>
+				<li class="nav-item"><a href="#check" class="nav-link"><i class="bi bi-shield-check"></i>パスワードチェック</a></li>
 				</ul>
 			</div>
 		</div>
@@ -45,23 +46,23 @@
 	</header>
 
 	<article id="app">
-	<div class="jumbotron">
-		<div class="container-fluid">
-		  <div class="row">
-			<div class="col-xs-12 outline">
-				<h1 class="display-4">パスワードチェッカー</h1>
-				<p>
-					パスワードの安全性を確認するためのサイトです。
-				</p>
-			</div>
-		  </div>
+	<div class="container">
+		<div class="bg-light p-4 p-sm-5 my-4 rounded">
+			<img src="password.png" class="img-fluid">
+			<h1 class="display-4">パスワードチェッカー</h1>
+			<p class="lead">
+				パスワードについて、組み合わせと解読時間を調べたり、実際のパスワードの解読時間をチェックできる。
+			</p>
+			<a class="btn btn-primary btn-lg" href="#words" role="button"><i class="bi bi-key"></i>使える文字</a>&nbsp;
+			<a class="btn btn-primary btn-lg" href="#time" role="button"><i class="bi bi-stopwatch"></i>組み合わせと解読時間</a>&nbsp;
+			<a class="btn btn-primary btn-lg" href="#check" role="button"><i class="bi bi-shield-check"></i>パスワードチェック</a>&nbsp;
 		</div>
 	</div>
 
 	<hr>
 
 	<div id="words" class="container">
-		<h2>パスワードで使える文字</h2>
+		<h2><i class="bi bi-key-fill"></i>パスワードで使える文字<i class="bi bi-key-fill"></i></h2>
 		<div class="row">
 			<div class="col-sm-12">
 				パスワードで使える文字は以下の種類がある。
@@ -84,7 +85,7 @@
 	<hr>
 
 	<div id="time" class="container">
-		<h2>組み合わせと解読時間</h2>
+		<h2><i class="bi bi-stopwatch-fill"></i>組み合わせと解読時間<i class="bi bi-stopwatch-fill"></i></h2>
 		<div class="row">
 			<div class="col-sm-12">
 				<dl>
@@ -117,13 +118,13 @@
 					※ JavaScrpt の計算精度の問題により 22 桁以上は一定の誤差が生じる。
 				 	</p>
 				 </dd>
-				<dt>解析時間</dt>
+				<dt>解読時間</dt>
 				<dd>
-					<span>下のスライダーを移動すると解析時における１秒間の計算回数を増減できる。</span><br>
+					<span>下のスライダーを移動すると解読時における１秒間の計算回数を増減できる。</span><br>
 					<label for="timing" class="form-label">１秒間の計算回数：{{ times }} 回</label>
 					<input id="timing" type="range" class="form-range" value="0" min="0" max="10" step="1"  v-model="timing">
 					<p>
-					上記の計算回数で解析するとその最大時間は<br>
+					上記の計算回数で解読するとその最大時間は<br>
 					{{ analysis }} 秒。<br>
 					つまり、<span class="fs-1 fw-semibold">{{ Janalysis }}</span>  になる。
 					</p>
@@ -136,7 +137,7 @@
 	<hr>
 
 	<div id="check" class="container">
-		<h2>パスワードチェッカー</h2>
+		<h2><i class="bi bi-shield-fill-check"></i>パスワードチェッカー<i class="bi bi-shield-fill-check"></i></h2>
 		<div class="row">
 			<div class="col-sm-12">
 				実際に使っているパスワードの強度を確認できる。
@@ -151,13 +152,13 @@
 					<li v-if="uppOn">英大文字が含まれている</li>
 					<li v-if="symOn">記号が含まれている</li>
 				</ul>
-				<span>下のスライダーを移動すると解析時における１秒間の計算回数を増減できる。</span><br>
+				<span>下のスライダーを移動すると解読時における１秒間の計算回数を増減できる。</span><br>
 				<label for="timing2" class="form-label">１秒間の計算回数：{{ times2 }} 回</label>
 				<input id="timing2" type="range" class="form-range" value="0" min="0" max="10" step="1"  v-model="timing2">
 				<p>
-				このパスワード「{{ password }}」は、１秒間に {{ times2 }} 回総当たりで解析すると
+				このパスワード「{{ password }}」は、１秒間に {{ times2 }} 回総当たりで解読すると
 				<div v-html="passAnalysis"></div>
-				通常は、総当たりではなく、辞書式の解析が用いられるため、実際はもっと速く解析できる。
+				通常は、総当たりではなく、辞書式の解読が用いられるため、実際はもっと速く解読できる。
 				</p>
 				<p>
 				※ JavaScript 計算精度の問題により 22 文字以上は一定の誤差が生じる（おそらく、おおよその年は合っている）。
@@ -253,7 +254,7 @@
 				if(pass.match(/[^a-zA-Z\d!"#$%&'()\-^\\@[;:\],./_=~|`{+*}<>?¥]/g)) return "<span class=\"fs-2 fw-semibold\">パスワードに不適切な文字列が含まれているため、分析不可。</span>"
 
 				let aTime = BigInt(Math.pow(n, this.password.length)) / BigInt(this.time2[Number(this.timing2)])
-				return "最長 <span class=\"fs-1 fw-semibold\">" +  makeTime(aTime) + "</span> で解析可能。"
+				return "最長 <span class=\"fs-1 fw-semibold\">" +  makeTime(aTime) + "</span> で解読可能。"
 			}
 		}
 	}).mount('#app')
