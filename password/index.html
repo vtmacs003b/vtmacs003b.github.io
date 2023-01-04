@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<title>パスワードチェッカー</title>
+
+		<link rel="shortcut icon" href="../favicon.ico" type="image/vnd.microsoft.icon">
+		<link rel="icon" href="https://vtmacs003b.github.io/favicon.ico" type="image/vnd.microsoft.icon">
+		<link rel="apple-touch-icon-precomposed" href="../favicon-152.png">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="../favicon-144.png">
+
+		<meta property="og:title" content="パスワードチェッカー">
+		<meta property="og:type" content="website">
+		<meta property="og:locale" content="ja_JP">
+		<meta property="og:site_name" content="パスワードチェッカー">
+		<meta property="og:url" content="https://vtmacs003b.github.io/password/">
+		<meta property="og:image" content="https://vtmacs003b.github.io/password/raspi_dojo.png">
+		<meta property="og:description" content="パスワードをチェックできるサイトです。">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+	</head>
+	<body>
+	<header>
+	<nav class="navbar sticky-top navbar-expand-lg" style="background-color: #e3f2fd;">
+		<div class="container-fluid">
+			<a href="/maebashi.jp/" class="navbar-brand">
+			<img src="../favicon.png" width="25" height="25" class="d-inline-block align-top" alt="M">
+			パスワードチェッカー</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbar-header">
+				<ul class="navbar-nav">
+				<li class="nav-item"><a href="#words" class="nav-link">使える文字</a></li>
+				<li class="nav-item"><a href="#time" class="nav-link">組み合わせと解読時間</a></li>
+				<li class="nav-item"><a href="#check" class="nav-link">パスワードチェック</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	</header>
+
+	<article>
+	<div class="jumbotron">
+		<div class="container-fluid">
+		  <div class="row">
+			<div class="col-xs-12 outline">
+				<h1 class="display-4">パスワードチェッカー</h1>
+				<p>
+					パスワードの安全性を確認するためのサイトです。
+				</p>
+			</div>
+		  </div>
+		</div>
+	</div>
+
+	<hr>
+
+	<div id="words" class="container">
+		<h2>パスワードで使える文字</h2>
+		<div class="row">
+			<div class="col-sm-12">
+				パスワードで使える文字は以下の種類がある。
+				<dl>
+				<dt>数字</dt>
+				<dd>0〜9 までの 10 個の数字。</dd>
+				<dt>英小文字</dt>
+				<dd>a〜z までの 26 個の文字。</dd>
+				<dt>英大文字</dt>
+				<dd>A〜Z までの 26 個の文字。</dd>
+				<dt>記号</dt>
+				<dd> ! " # $ % & ' ( ) - ^ \ @ [ ; : ] , . / _ = ~ | ` { + * } < > ? の 32 個の記号。<br>
+				ただし、使える文字が制限されている場合がある。<br>
+				また、\（バックスラッシュ）の代わりに ¥（円記号）か"使われることがある。</dd>
+				</dl>
+			</div>
+		</div>
+	</div><!-- #words -->
+
+	<hr>
+
+	<div id="time" class="container">
+		<h2>組み合わせと解読時間</h2>
+		<div class="row" id="app">
+			<div class="col-sm-12">
+				<dl>
+				<dt>文字の種類</dt>
+				<dd>
+					パスワードで使う文字の種類をチェックする。<br>
+					<input type="checkbox" id="num" value="num" checked v-model="checkedNames">
+					<label for="num">数字</label>&nbsp;
+
+					<input type="checkbox" id="low" value="low" v-model="checkedNames" />
+					<label for="low">英小文字</label>&nbsp;
+
+					<input type="checkbox" id="upp" value="upp" v-model="checkedNames" />
+					<label for="upp">英大文字</label>&nbsp;
+
+					<input type="checkbox" id="sym" value="sym" v-model="checkedNames" />
+					<label for="sym">記号</label>
+				</dd>
+				<dt>組み合わせの数</dt>
+				<dd>
+					<span>下のスライダーを移動すると文字数を増減できる。</span><br>
+					<label for="range" class="form-label">文字数：{{ range }}</label>
+					<input id="range" type="range" class="form-range" value="1" min="1" max="36" step="1"  v-model="range">
+					<p>
+					上記の種類と文字数の組み合わせは<br>
+					 {{ combi }} 通り。<br>
+					つまり、{{ Jcombi }} 通りになる。
+					</p>
+					<p>
+					※Javascrpt の計算精度の問題により 22 桁以上は一定の誤差が生じる。
+				 	</p>
+				 </dd>
+				<dt>解析時間</dt>
+				<dd>
+					<span>下のスライダーを移動すると１秒間の計算回数を増減できる。</span><br>
+					<label for="timing" class="form-label">１秒間の計算回数：{{ times }} 回</label>
+					<input id="timing" type="range" class="form-range" value="0" min="0" max="10" step="1"  v-model="timing">
+					<p>
+					上記の計算回数で解析するとその最大時間は<br>
+					{{ analysis }} 秒。<br>
+					つまり、 {{ Janalysis }}  になる。
+					</p>
+				 </dd>
+				</dl>
+			</div>
+		</div>
+	</div><!-- #time -->
+
+	</article>
+
+	<footer class="bd-footer text-muted">
+	<div class="container-fluid text-center">
+		<hr>
+		<p>
+			Copyright © 2001- MACS-Project All Rights Reserved.
+		</p>
+	</div>
+	</footer>
+
+	<script src="https://unpkg.com/vue@3.2.36"></script>
+	<script>
+	Vue.createApp({
+		data() {
+			return {
+				time : ["100万（1M）", "1000万（10M）", "1億（100M）", "10億（1G）", "100億（10G）", "1000億（100G）","１兆（1T）","１０兆（10T）","１００兆（100T）","１０００兆（1P）","１京（10P）" ],
+				time2 : ["1000000", "10000000", "100000000", "1000000000", "10000000000", "100000000000","1000000000000","10000000000000","100000000000000","1000000000000000","10000000000000000" ],
+				checkedNames: ['num'],
+				range: 1,
+				timing: 0
+			}
+		},
+		computed: {
+			combi() {
+				let n = checked2num(this.checkedNames)
+				return BigInt(Math.pow(n, this.range)).toLocaleString()
+			},
+			Jcombi() {
+				let n = checked2num(this.checkedNames)
+				return  ag2manshin(BigInt(Math.pow(n, this.range)).toString())
+			},
+			times() {
+				return this.time[Number(this.timing)]
+			},
+			analysis() {
+				let n = checked2num(this.checkedNames)
+				let aTime = BigInt(Math.pow(n, this.range)) / BigInt(this.time2[Number(this.timing)])
+				return aTime
+			},
+			Janalysis() {
+				let n = checked2num(this.checkedNames)
+				let aTime = BigInt(Math.pow(n, this.range)) / BigInt(this.time2[Number(this.timing)])
+				return makeTime(aTime)
+			}
+		}
+	}).mount('#app')
+
+	// 文字の種類から場合の数を返す。
+	function checked2num(c) {
+		let n = 0;
+		if(c.includes("num")) n+= 10
+		if(c.includes("low")) n+= 26
+		if(c.includes("upp")) n+= 26
+		if(c.includes("sym")) n+= 32
+		return n;
+	}
+
+	// 桁の大きな数値を万進の表記に変換して表示。https://memo.ag2works.tokyo/post-4722/
+	function ag2manshin(a){
+		//数値に変換できなかった場合
+		if(isNaN(Number(a))) return console.log('Error : Not a Number.');
+		//1万未満の場合
+		if(Number(a) < 10000) return a;
+
+		//ゼロサプレスを行う関数
+		let ag2zeroSuppress = n => {
+			let i = 0;
+			while (String(n).charAt(i) === '0') i++;
+			return String(n).slice(i);
+		}
+
+		let hiNum, lowNum, pointNum, manshinUnit, manshinUnitLen;
+
+		manshinUnit = ['万','億','兆','京','垓','𥝱','穣','溝','澗','正','載','極','恒河沙','阿僧祇','那由他','不可思議','無量大数'];
+		manshinUnitLen = manshinUnit.length;
+
+		//小数点を含めている場合
+		if(String(a).split('.').length > 1){
+			pointNum = '.' + String(a).split('.')[1];
+			a = String(a).split('.')[0];
+		} else {
+			pointNum = '';
+		}
+
+		hiNum = a;
+		lowNum = '';
+
+		for(let i = 0, j = 0, k = (a / 10000); j < manshinUnitLen &&  k >= 1; i++, j++, k /= 10000){
+			//下4桁をチェックして処理
+			//4桁とも0の場合は万進の単位を削除
+			if(i > 0 && !ag2zeroSuppress(String(hiNum).slice(-4))) lowNum = String(lowNum).slice(1);
+			//1文字目に万進の単位、後ろに処理済みの下4桁を付けて保持
+			lowNum = manshinUnit[i] + ag2zeroSuppress(String(hiNum).slice(-4)) + lowNum;
+
+			//下4桁を削除して保持
+			hiNum = String(hiNum).slice(0,-4);
+		}
+
+		//変換した表記の文字列を返す
+		return hiNum + lowNum + pointNum;
+	}
+	function makeTime(num) {
+		let y = num / (365n*24n*3600n);
+		let d = num % (365n*24n*3600n) / (24n*3600n) | 0n;
+		let h = num % (24n*3600n) / 3600n | 0n;
+		let m =num % 3600n / 60n | 0n; 
+		let s = num % 60n; 
+		if(y > 10000) {
+			return "約" + ag2manshin(y.toString()) + "年";
+		} else if(y != 0) {
+			return y + "年" + d + "日" + h + "時間" + m + "分" + s + "秒";
+		} else if(d != 0)  {
+			return d + "日" + h + "時間" + m + "分" + s + "秒";
+		} else if(h != 0)  {
+			return h + "時間" + m + "分" + s + "秒";
+		} else if(m != 0)  {
+			return m + "分" + s + "秒";
+		} else if(s != 0)  {
+			return s + "秒";
+		} else {
+			return "0 秒以下";
+		}
+	}
+	</script>
+
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90731510-1', 'auto');
+  ga('send', 'pageview');
+
+	</script>
+	</body>
+</html>
