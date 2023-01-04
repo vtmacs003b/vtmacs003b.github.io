@@ -44,7 +44,7 @@
 	</nav>
 	</header>
 
-	<article>
+	<article id="app">
 	<div class="jumbotron">
 		<div class="container-fluid">
 		  <div class="row">
@@ -85,7 +85,7 @@
 
 	<div id="time" class="container">
 		<h2>組み合わせと解読時間</h2>
-		<div class="row" id="app">
+		<div class="row">
 			<div class="col-sm-12">
 				<dl>
 				<dt>文字の種類</dt>
@@ -111,27 +111,60 @@
 					<p>
 					上記の種類と文字数の組み合わせは<br>
 					 {{ combi }} 通り。<br>
-					つまり、{{ Jcombi }} 通りになる。
+					つまり、<span class="fs-1 fw-semibold">{{ Jcombi }}</span> 通りになる。
 					</p>
 					<p>
-					※Javascrpt の計算精度の問題により 22 桁以上は一定の誤差が生じる。
+					※ JavaScrpt の計算精度の問題により 22 桁以上は一定の誤差が生じる。
 				 	</p>
 				 </dd>
 				<dt>解析時間</dt>
 				<dd>
-					<span>下のスライダーを移動すると１秒間の計算回数を増減できる。</span><br>
+					<span>下のスライダーを移動すると解析時における１秒間の計算回数を増減できる。</span><br>
 					<label for="timing" class="form-label">１秒間の計算回数：{{ times }} 回</label>
 					<input id="timing" type="range" class="form-range" value="0" min="0" max="10" step="1"  v-model="timing">
 					<p>
 					上記の計算回数で解析するとその最大時間は<br>
 					{{ analysis }} 秒。<br>
-					つまり、 {{ Janalysis }}  になる。
+					つまり、<span class="fs-1 fw-semibold">{{ Janalysis }}</span>  になる。
 					</p>
 				 </dd>
 				</dl>
 			</div>
 		</div>
 	</div><!-- #time -->
+	
+	<hr>
+
+	<div id="check" class="container">
+		<h2>パスワードチェッカー</h2>
+		<div class="row">
+			<div class="col-sm-12">
+				実際に使っているパスワードの強度を確認できる。
+				<div class="form-floating">
+					<input type="password" class="form-control" id="floatingPassword" placeholder="Password" v-model="password">
+					<label for="floatingPassword">Password</label>
+				</div>
+				<ul>
+					<li>{{ passLen }} 文字</li>
+					<li v-if="numOn">数字が含まれている</li>
+					<li v-if="lowOn">英小文字が含まれている</li>
+					<li v-if="uppOn">英大文字が含まれている</li>
+					<li v-if="symOn">記号が含まれている</li>
+				</ul>
+				<span>下のスライダーを移動すると解析時における１秒間の計算回数を増減できる。</span><br>
+				<label for="timing2" class="form-label">１秒間の計算回数：{{ times2 }} 回</label>
+				<input id="timing2" type="range" class="form-range" value="0" min="0" max="10" step="1"  v-model="timing2">
+				<p>
+				このパスワード「{{ password }}」は、１秒間に {{ times2 }} 回総当たりで解析すると
+				<div v-html="passAnalysis"></div>
+				通常は、総当たりではなく、辞書式の解析が用いられるため、実際はもっと速く解析できる。
+				</p>
+				<p>
+				※ JavaScript 計算精度の問題により 22 文字以上は一定の誤差が生じる（おそらく、おおよその年は合っている）。
+				</p>
+			</div>
+		</div>
+	</div><!-- #check -->
 
 	</article>
 
@@ -149,11 +182,17 @@
 	Vue.createApp({
 		data() {
 			return {
-				time : ["100万（1M）", "1000万（10M）", "1億（100M）", "10億（1G）", "100億（10G）", "1000億（100G）","１兆（1T）","１０兆（10T）","１００兆（100T）","１０００兆（1P）","１京（10P）" ],
+				time : ["100万（1M）", "1000万（10M）", "1億（100M）", "10億（1G）", "100億（10G）", "1000億（100G）","1兆（1T）","10兆（10T）","100兆（100T）","1000兆（1P）","1京（10P）" ],
 				time2 : ["1000000", "10000000", "100000000", "1000000000", "10000000000", "100000000000","1000000000000","10000000000000","100000000000000","1000000000000000","10000000000000000" ],
 				checkedNames: ['num'],
 				range: 1,
-				timing: 0
+				timing: 0,
+				timing2: 0,
+				password: "",
+				numOn: false,
+				lowOn: false,
+				uppOn: false,
+				symOn: false,
 			}
 		},
 		computed: {
@@ -168,6 +207,9 @@
 			times() {
 				return this.time[Number(this.timing)]
 			},
+			times2() {
+				return this.time[Number(this.timing2)]
+			},
 			analysis() {
 				let n = checked2num(this.checkedNames)
 				let aTime = BigInt(Math.pow(n, this.range)) / BigInt(this.time2[Number(this.timing)])
@@ -177,6 +219,41 @@
 				let n = checked2num(this.checkedNames)
 				let aTime = BigInt(Math.pow(n, this.range)) / BigInt(this.time2[Number(this.timing)])
 				return makeTime(aTime)
+			},
+			passLen() {
+				return this.password.length
+			},
+			passAnalysis() {
+				let pass = this.password
+				let n = 0
+				if(pass.match(/[0-9]/g)) {
+					this.numOn = true
+					n += 10
+				}  else {
+					this.numOn = false
+				}
+				if(pass.match(/[a-z]/g)) {
+					this.lowOn = true
+					n += 26
+				} else {
+					this.lowOn = false
+				}
+				if(pass.match(/[A-Z]/g)) { 
+					this.uppOn = true
+					n += 26
+				} else {
+					this.uppOn = false
+				}
+				if(pass.match(/[!"#$%&'()\-^\\@[;:\],./_=~|`{+*}<>?¥]/g)) {
+					this.symOn = true
+					n += 32
+				} else {
+					this.symOn = false
+				}
+				if(pass.match(/[^a-zA-Z\d!"#$%&'()\-^\\@[;:\],./_=~|`{+*}<>?¥]/g)) return "<span class=\"fs-2 fw-semibold\">パスワードに不適切な文字列が含まれているため、分析不可。</span>"
+
+				let aTime = BigInt(Math.pow(n, this.password.length)) / BigInt(this.time2[Number(this.timing2)])
+				return "最長 <span class=\"fs-1 fw-semibold\">" +  makeTime(aTime) + "</span> で解析可能。"
 			}
 		}
 	}).mount('#app')
