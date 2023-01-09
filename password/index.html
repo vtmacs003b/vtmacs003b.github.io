@@ -39,6 +39,7 @@
 				<li class="nav-item"><a href="#words" class="nav-link"><i class="bi bi-key"></i>使える文字</a></li>
 				<li class="nav-item"><a href="#time" class="nav-link"><i class="bi bi-stopwatch"></i>組み合わせと解読時間</a></li>
 				<li class="nav-item"><a href="#check" class="nav-link"><i class="bi bi-shield-check"></i>パスワードチェック</a></li>
+				<li class="nav-item"><a href="#calc" class="nav-link"><i class="bi bi-calculator"></i></i>計算回数について</a></li>
 				</ul>
 			</div>
 		</div>
@@ -51,11 +52,13 @@
 			<img src="password.png" class="img-fluid">
 			<h1 class="display-4">パスワードチェッカー</h1>
 			<p class="lead">
-				パスワードについて、組み合わせと解読時間を調べたり、実際のパスワードの解読時間をチェックできる。
+				パスワードについて、組み合わせと解読時間を調べたり、実際のパスワードの解読時間をチェックできる。<br>
+				※１秒間の計算回数によって、解読時間は変化する。
 			</p>
 			<a class="btn btn-primary btn-lg" href="#words" role="button"><i class="bi bi-key"></i>使える文字</a>&nbsp;
 			<a class="btn btn-primary btn-lg" href="#time" role="button"><i class="bi bi-stopwatch"></i>組み合わせと解読時間</a>&nbsp;
 			<a class="btn btn-primary btn-lg" href="#check" role="button"><i class="bi bi-shield-check"></i>パスワードチェック</a>&nbsp;
+			<a class="btn btn-primary btn-lg" href="#calc" role="button"><i class="bi bi-calculator"></i>計算回数について</a>&nbsp;
 		</div>
 	</div>
 
@@ -166,6 +169,91 @@
 			</div>
 		</div>
 	</div><!-- #check -->
+
+	<div id="calc" class="container">
+		<h2><i class="bi bi-calculator-fill"></i>計算回数について<i class="bi bi-calculator-fill"></i></h2>
+		<div class="row">
+			<div class="col-sm-12">
+				１秒間の計算回数について、目安は以下の通り。<br>
+				参考文献として
+				<ol>
+					<li><a href="https://logmi.jp/tech/articles/324500">12文字以下のパスワードは解読可能</a></li>
+					<li><a href="https://www.marbacka.net/blog/wifi_password_safety_length/">Wi-Fiの暗号化キーは何文字あれば安全か</a></li>
+					<li><a href="https://ja.wikipedia.org/wiki/FLOPS">FLOPS @ Wikipedia</a></li>
+				</ol>
+				として上げておく。参考文献 2 では、半精度（FP16）のFLOPS（1秒間の浮動小数点演算回数） を目安としている。しかし、参考文献 1 の実測値（ZIP方式のハッシュ解析）と参考文献 3 の単精度（FP32）のFLOPSを比較して、計算回数が1000桁ほどズレている。そのため、100億回のRTX2080Ti 以外は、単精度（FP32）のFLOPS を1000で割った値で算出している。これは、参考文献 1 における GTX 1600 SUPER と Tesla(NVIDIA) V100 の実測値と参考文献 3 の単精度のFLOPSから1000を割った値がほぼ同じになることから、参考値としても問題ないと判断した。ただし、少なくとも NVIDIA のアーキテクチャであれば問題ないが、Apple M1 Max ではさらに10分の1になったことから、NVIDIA 以外のアーキテクチャでは1桁程度の差が出る可能性がある（RTX2080Ti と M1 Max のFLOPS はほぼ同じ）。
+				<dl>
+				<dt>100万回</dt>
+				<dd>
+				</dd>
+				<dt>1000万回</dt>
+				<dd>
+				</dd>
+				<dt>1億回</dt>
+				<dd>
+				</dd>
+				<dt>10億回</dt>
+				<dd>
+				Intel Iris Plus（GPU）でMD5（鍵長128bit）を演算した場合（<strong>実測：9.18億回</strong>）<br>
+				Apple M1 Max 32コアの内蔵 GPUで ZipCrypto 方式の内部ハッシュ（鍵長96bit）を演算した場合（<strong>実測：10.408億回</strong>）<br>
+				Intel Core i7-1065G7でMD5（鍵長128bit）を演算した場合（<strong>実測：13.225億回</strong>）<br>
+				Apple Ultra 48コアの内蔵 GPUで ZipCrypto 方式の内部ハッシュ（鍵長96bit）を演算した場合（<strong>実測：15.787億回</strong>）<br>
+				Sony Playstation 4 で ZipCrypto 方式の内部ハッシュ（鍵長96bit）を演算した場合（推定値：18億回）<br>
+				</dd>
+				<dt>100億回</dt>
+				<dd>
+				NVIDIA GeForce RTX 2080Ti １枚で ZipCrypto 方式の内部ハッシュ（鍵長96bit）を演算した場合（<strong>実測値：100億回</strong>）<br>
+				Sony Playstation 5 で ZipCrypto 方式の内部ハッシュ（鍵長96bit）を演算した場合（推定値：103億回）<br>
+				Xbox Series X で ZipCrypto 方式の内部ハッシュ（鍵長96bit）を演算した場合（推定値：121.5億回）<br>
+				Apple M1 Max 32コアの内蔵 GPUでMD5（鍵長128bit）を演算した場合（<strong>実測：132.753億回</strong>）<br>
+				Apple M1 Ultra 48コアの内蔵 GPUでMD5（鍵長128bit）を演算した場合（<strong>実測：171.389億回</strong>）<br>
+				</dd>
+				<dt>1000億回</dt>
+				<dd>
+				NVIDIA GeForce RTX 4090 １枚で ZipCrypto 方式の内部ハッシュ（鍵長96bit）を演算した場合（推定値：825.7536億回）<br>
+				NVIDIA GeForce RTX 3090Ti ２枚で ZipCrypto 方式の内部ハッシュ（鍵長96bit）を演算した場合（推定値：799.9488億回）
+				</dd>
+				<dt>1兆回</dt>
+				<dd>
+				スーパーコンピュータ「京」で ZipCrypto 方式の内部ハッシュ（鍵長96bit）を演算した場合（推定値：１兆回）
+				</dd>
+				</dd>
+				<dt>10兆回</dt>
+				<dd>
+				</dd>
+				<dt>100兆回</dt>
+				<dd>
+				</dd>
+				<dt>1000兆回</dt>
+				<dd>
+				スーパーコンピュータ「富岳」で ZipCrypto 方式の内部ハッシュ（鍵長96bit）を演算した場合（推定値：977兆回）
+				</dd>
+				<dt>1京回</dt>
+				<dd>
+				
+				</dd>
+				</dl>
+				その他の参考文献
+				<ul>
+					<li><a href="https://www.cpu-monkey.com/ja/cpu_benchmark-igpu_fp32_single_precision_gflops-11">iGPU-FP32パフォーマンス（単精度GFLOPS）</a></li>
+					<li><a href="http://arbitrage.jpn.org/it/gpu/">おすすめグラボのベンチマーク性能比較と選び方</a></li>
+					<li><a href="https://devblog.lac.co.jp/entry/20220513"> ゲーミングPCのCPU、GPU性能をパスワードクラッキングでベンチマークしてみた</a></li>
+					<li><a href="https://www.fujitsu.com/jp/about/businesspolicy/tech/k/whatis/system/">スーパーコンピュータ「京」はとてつもなく速い</a></li>
+					<li><a href="https://www.fujitsu.com/jp/about/businesspolicy/tech/fugaku/specifications/">仕様 - スーパーコンピュータ「富岳」 : 富士通 - Fujitsu</a></li>
+					<li>ハッシュ計算に利用したソフト<a href="https://hashcat.net/hashcat/">hashcat</a></li>
+				</ul>
+				<dl>
+				<dt>ハッシュについて</dt>
+				<dd>
+				　通常、パスワードはそのまま保存されずに、ハッシュアルゴリズムを用いて別の文字列に変換される。ハッシュアルゴリズムによって作成された文字列は、そのままではパスワードとして使えないため、パスワードを知りたい場合はその文字列から解読を行う必要がある。<br>
+				　ZipCrypto は Zip ファイルにパスワードをかけるときに使われるハッシュアルゴリズムである。現在は、比較的簡単に解読できてしまうため、非推奨となっている。<br>
+				　MD5 はハッシュアルゴリズムの１つで、一番良く使われている。前身として、MD4 があり、Windows はこのハッシュアルゴリズムでパスワードを保存している（参考：<a href="https://learn.microsoft.com/ja-jp/windows-server/security/kerberos/passwords-technical-overview">パスワードの技術概要</a>）。MD4 の解読時間は MD5 と比較しておおよそ半分程度になる。<br>
+				　Mac OS X は、パスワードの保存に、SHA512 というハッシュアルゴリズムを採用している。これは Windows のハッシュアルゴリズムと比較して、2万倍程度の強度がある。つまり、解読時間は MD5 と比較して1万倍になる。
+				</dd>
+				</dl>
+			</div>
+		</div>
+	</div><!-- #calc -->
 
 	</article>
 
@@ -332,7 +420,7 @@
 		} else if(s != 0)  {
 			return s + "秒";
 		} else {
-			return "0 秒以下";
+			return "1 秒未満";
 		}
 	}
 	</script>
