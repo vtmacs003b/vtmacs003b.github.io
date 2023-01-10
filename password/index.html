@@ -368,7 +368,7 @@
 
 		//ゼロサプレスを行う関数
 		let ag2zeroSuppress = n => {
-			let i = 0n;
+			let i = 0;
 			while (n.toString().charAt(i) === '0') i++;
 			return n.toString().slice(i);
 		}
