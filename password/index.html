@@ -111,7 +111,7 @@
 				<dd>
 					<span>下のスライダーを移動すると文字数を増減できる。</span><br>
 					<label for="range" class="form-label">文字数：{{ range }}</label>
-					<input id="range" type="range" class="form-range" value="1n" min="1n" max="36n" step="1n"  v-model="range">
+					<input id="range" type="range" class="form-range" value="1" min="1" max="36" step="1"  v-model="range">
 					<p>
 					上記の種類と文字数の組み合わせは<br>
 					 {{ combi }} 通り。<br>
@@ -125,7 +125,7 @@
 				<dd>
 					<span>下のスライダーを移動すると解読時における１秒間の計算回数を増減できる。</span><br>
 					<label for="timing" class="form-label">１秒間の計算回数：{{ times }} 回</label>
-					<input id="timing" type="range" class="form-range" value="0n" min="0n" max="10n" step="1n"  v-model="timing">
+					<input id="timing" type="range" class="form-range" value="0" min="0" max="10" step="1"  v-model="timing">
 					<p>
 					上記の計算回数で解読するとその最大時間は<br>
 					{{ analysis }} 秒。<br>
@@ -157,7 +157,7 @@
 				</ul>
 				<span>下のスライダーを移動すると解読時における１秒間の計算回数を増減できる。</span><br>
 				<label for="timing2" class="form-label">１秒間の計算回数：{{ times2 }} 回</label>
-				<input id="timing2" type="range" class="form-range" value="0n" min="0n" max="10n" step="1n"  v-model="timing2">
+				<input id="timing2" type="range" class="form-range" value="0" min="0" max="10" step="1"  v-model="timing2">
 				<p>
 				このパスワード「{{ password }}」は、１秒間に {{ times2 }} 回総当たりで解読すると
 				<div v-html="passAnalysis"></div>
@@ -289,11 +289,11 @@
 		computed: {
 			combi() {
 				let n = checked2num(this.checkedNames)
-				return BigInt(n ** this.range).toLocaleString()
+				return (BigInt(n) ** BigInt(this.range)).toLocaleString()
 			},
 			Jcombi() {
 				let n = checked2num(this.checkedNames)
-				return  ag2manshin(BigInt(n ** this.range).toString())
+				return  ag2manshin(BigInt(n) ** BigInt(this.range)).toString())
 			},
 			times() {
 				return this.time[Number(this.timing)]
@@ -303,12 +303,12 @@
 			},
 			analysis() {
 				let n = checked2num(this.checkedNames)
-				let aTime = BigInt(n ** this.range) / BigInt(this.time2[Number(this.timing)])
+				let aTime = (BigInt(n) ** BigInt(this.range)) / BigInt(this.time2[Number(this.timing)])
 				return aTime
 			},
 			Janalysis() {
 				let n = checked2num(this.checkedNames)
-				let aTime = BigInt(n ** this.range) / BigInt(this.time2[Number(this.timing)])
+				let aTime = (BigInt(n) ** BigInt(this.range)) / BigInt(this.time2[Number(this.timing)])
 				return makeTime(aTime)
 			},
 			passLen() {
@@ -316,34 +316,34 @@
 			},
 			passAnalysis() {
 				let pass = this.password
-				let n = 0n
+				let n = 0
 				if(pass.match(/[0-9]/g)) {
 					this.numOn = true
-					n += 10n
+					n += 10
 				}  else {
 					this.numOn = false
 				}
 				if(pass.match(/[a-z]/g)) {
 					this.lowOn = true
-					n += 26n
+					n += 26
 				} else {
 					this.lowOn = false
 				}
 				if(pass.match(/[A-Z]/g)) { 
 					this.uppOn = true
-					n += 26n
+					n += 26
 				} else {
 					this.uppOn = false
 				}
 				if(pass.match(/[!"#$%&'()\-^\\@[;:\],./_=~|`{+*}<>?¥]/g)) {
 					this.symOn = true
-					n += 32n
+					n += 32
 				} else {
 					this.symOn = false
 				}
 				if(pass.match(/[^a-zA-Z\d!"#$%&'()\-^\\@[;:\],./_=~|`{+*}<>?¥]/g)) return "<span class=\"fs-2 fw-semibold\">パスワードに不適切な文字列が含まれているため、分析不可。</span>"
 
-				let aTime = (n ** BigInt(this.password.length)) / BigInt(this.time2[Number(this.timing2)])
+				let aTime = (BigInt(n) ** BigInt(this.password.length)) / BigInt(this.time2[Number(this.timing2)])
 				return "最長 <span class=\"fs-1 fw-semibold\">" +  makeTime(aTime) + "</span> で解読可能。"
 			}
 		}
