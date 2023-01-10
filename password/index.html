@@ -111,7 +111,7 @@
 				<dd>
 					<span>下のスライダーを移動すると文字数を増減できる。</span><br>
 					<label for="range" class="form-label">文字数：{{ range }}</label>
-					<input id="range" type="range" class="form-range" value="1" min="1" max="36" step="1"  v-model="range">
+					<input id="range" type="range" class="form-range" value="1n" min="1n" max="36n" step="1n"  v-model="range">
 					<p>
 					上記の種類と文字数の組み合わせは<br>
 					 {{ combi }} 通り。<br>
@@ -125,7 +125,7 @@
 				<dd>
 					<span>下のスライダーを移動すると解読時における１秒間の計算回数を増減できる。</span><br>
 					<label for="timing" class="form-label">１秒間の計算回数：{{ times }} 回</label>
-					<input id="timing" type="range" class="form-range" value="0" min="0" max="10" step="1"  v-model="timing">
+					<input id="timing" type="range" class="form-range" value="0n" min="0n" max="10n" step="1n"  v-model="timing">
 					<p>
 					上記の計算回数で解読するとその最大時間は<br>
 					{{ analysis }} 秒。<br>
@@ -157,7 +157,7 @@
 				</ul>
 				<span>下のスライダーを移動すると解読時における１秒間の計算回数を増減できる。</span><br>
 				<label for="timing2" class="form-label">１秒間の計算回数：{{ times2 }} 回</label>
-				<input id="timing2" type="range" class="form-range" value="0" min="0" max="10" step="1"  v-model="timing2">
+				<input id="timing2" type="range" class="form-range" value="0n" min="0n" max="10n" step="1n"  v-model="timing2">
 				<p>
 				このパスワード「{{ password }}」は、１秒間に {{ times2 }} 回総当たりで解読すると
 				<div v-html="passAnalysis"></div>
