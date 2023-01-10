@@ -289,7 +289,7 @@
 		computed: {
 			combi() {
 				let n = checked2num(this.checkedNames)
-				return (BigInt(n) ** BigInt(this.range)).toLocaleString()
+				return (BigInt(n ** this.range)).toLocaleString()
 			},
 			Jcombi() {
 				let n = checked2num(this.checkedNames)
