@@ -389,10 +389,10 @@
 		hiNum = a;
 		lowNum = '';
 
-		for(let i = 0, j = 0, k = (a / 10000n); j < manshinUnitLen &&  k >= 1n; i++, j++, k /= 10000n){
+		for(let i = 0n, j = 0n, k = (a / 10000n); j < manshinUnitLen &&  k >= 1n; i++, j++, k /= 10000n){
 			//下4桁をチェックして処理
 			//4桁とも0の場合は万進の単位を削除
-			if(i > 0 && !ag2zeroSuppress(String(hiNum).slice(-4))) lowNum = String(lowNum).slice(1);
+			if(i > 0n && !ag2zeroSuppress(String(hiNum).slice(-4))) lowNum = String(lowNum).slice(1);
 			//1文字目に万進の単位、後ろに処理済みの下4桁を付けて保持
 			lowNum = manshinUnit[i] + ag2zeroSuppress(String(hiNum).slice(-4)) + lowNum;
 
