@@ -351,11 +351,11 @@
 
 	// 文字の種類から場合の数を返す。
 	function checked2num(c) {
-		let n = 0n;
-		if(c.includes("num")) n+= 10n
-		if(c.includes("low")) n+= 26n
-		if(c.includes("upp")) n+= 26n
-		if(c.includes("sym")) n+= 32n
+		let n = 0;
+		if(c.includes("num")) n+= 10
+		if(c.includes("low")) n+= 26
+		if(c.includes("upp")) n+= 26
+		if(c.includes("sym")) n+= 32
 		return n;
 	}
 
