@@ -276,9 +276,9 @@
 				time : ["100万（1M）", "1000万（10M）", "1億（100M）", "10億（1G）", "100億（10G）", "1000億（100G）","1兆（1T）","10兆（10T）","100兆（100T）","1000兆（1P）","1京（10P）" ],
 				time2 : ["1000000", "10000000", "100000000", "1000000000", "10000000000", "100000000000","1000000000000","10000000000000","100000000000000","1000000000000000","10000000000000000" ],
 				checkedNames: ['num'],
-				range: 1,
-				timing: 0,
-				timing2: 0,
+				range: 1n,
+				timing: 0n,
+				timing2: 0n,
 				password: "",
 				numOn: false,
 				lowOn: false,
@@ -289,11 +289,11 @@
 		computed: {
 			combi() {
 				let n = checked2num(this.checkedNames)
-				return (BigInt(n) ** BigInt(this.range)).toLocaleString()
+				return (n ** this.range).toLocaleString()
 			},
 			Jcombi() {
 				let n = checked2num(this.checkedNames)
-				return  ag2manshin(BigInt(n ** this.range)).toString()
+				return  ag2manshin(n ** this.range).toString()
 			},
 			times() {
 				return this.time[Number(this.timing)]
@@ -303,7 +303,7 @@
 			},
 			analysis() {
 				let n = checked2num(this.checkedNames)
-				let aTime = (BigInt(n ** this.range)) / BigInt(this.time2[Number(this.timing)])
+				let aTime = (n ** this.range)) / BigInt(this.time2[Number(this.timing)])
 				return aTime
 			},
 			Janalysis() {
@@ -316,28 +316,28 @@
 			},
 			passAnalysis() {
 				let pass = this.password
-				let n = 0
+				let n = 0n
 				if(pass.match(/[0-9]/g)) {
 					this.numOn = true
-					n += 10
+					n += 10n
 				}  else {
 					this.numOn = false
 				}
 				if(pass.match(/[a-z]/g)) {
 					this.lowOn = true
-					n += 26
+					n += 26n
 				} else {
 					this.lowOn = false
 				}
 				if(pass.match(/[A-Z]/g)) { 
 					this.uppOn = true
-					n += 26
+					n += 26n
 				} else {
 					this.uppOn = false
 				}
 				if(pass.match(/[!"#$%&'()\-^\\@[;:\],./_=~|`{+*}<>?¥]/g)) {
 					this.symOn = true
-					n += 32
+					n += 32n
 				} else {
 					this.symOn = false
 				}
@@ -351,11 +351,11 @@
 
 	// 文字の種類から場合の数を返す。
 	function checked2num(c) {
-		let n = 0;
-		if(c.includes("num")) n+= 10
-		if(c.includes("low")) n+= 26
-		if(c.includes("upp")) n+= 26
-		if(c.includes("sym")) n+= 32
+		let n = 0n
+		if(c.includes("num")) n+= 10n
+		if(c.includes("low")) n+= 26n
+		if(c.includes("upp")) n+= 26n
+		if(c.includes("sym")) n+= 32n
 		return n;
 	}
 
@@ -368,7 +368,7 @@
 
 		//ゼロサプレスを行う関数
 		let ag2zeroSuppress = n => {
-			let i = 0;
+			let i = 0n;
 			while (String(n).charAt(i) === '0') i++;
 			return String(n).slice(i);
 		}
