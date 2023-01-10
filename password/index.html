@@ -289,11 +289,11 @@
 		computed: {
 			combi() {
 				let n = checked2num(this.checkedNames)
-				return BigInt(Math.pow(n, this.range)).toLocaleString()
+				return BigInt(n ** this.range).toLocaleString()
 			},
 			Jcombi() {
 				let n = checked2num(this.checkedNames)
-				return  ag2manshin(BigInt(Math.pow(n, this.range)).toString())
+				return  ag2manshin(BigInt(n ** this.range).toString())
 			},
 			times() {
 				return this.time[Number(this.timing)]
