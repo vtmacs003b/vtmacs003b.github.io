@@ -303,7 +303,7 @@
 			},
 			analysis() {
 				let n = checked2num(this.checkedNames)
-				let aTime = BigInt(Math.pow(n, this.range)) / BigInt(this.time2[Number(this.timing)])
+				let aTime = BigInt(n ** this.range) / BigInt(this.time2[Number(this.timing)])
 				return aTime
 			},
 			Janalysis() {
