@@ -343,7 +343,7 @@
 				}
 				if(pass.match(/[^a-zA-Z\d!"#$%&'()\-^\\@[;:\],./_=~|`{+*}<>?¥]/g)) return "<span class=\"fs-2 fw-semibold\">パスワードに不適切な文字列が含まれているため、分析不可。</span>"
 
-				let aTime = BigInt(n ** this.password.length) / BigInt(this.time2[Number(this.timing2)])
+				let aTime = n ** BigInt(this.password.length) / BigInt(this.time2[Number(this.timing2)])
 				return "最長 <span class=\"fs-1 fw-semibold\">" +  makeTime(aTime) + "</span> で解読可能。"
 			}
 		}
