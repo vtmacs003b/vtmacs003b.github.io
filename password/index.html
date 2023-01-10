@@ -364,7 +364,7 @@
 		//数値に変換できなかった場合
 		if(isNaN(Number(a))) return console.log('Error : Not a Number.');
 		//1万未満の場合
-		if(Number(a) < 10000) return a;
+		if(Number(a) < 10000n) return a;
 
 		//ゼロサプレスを行う関数
 		let ag2zeroSuppress = n => {
@@ -389,7 +389,7 @@
 		hiNum = a;
 		lowNum = '';
 
-		for(let i = 0, j = 0, k = (a / 10000); j < manshinUnitLen &&  k >= 1; i++, j++, k /= 10000){
+		for(let i = 0, j = 0, k = (a / 10000n); j < manshinUnitLen &&  k >= 1n; i++, j++, k /= 10000n){
 			//下4桁をチェックして処理
 			//4桁とも0の場合は万進の単位を削除
 			if(i > 0 && !ag2zeroSuppress(String(hiNum).slice(-4))) lowNum = String(lowNum).slice(1);
