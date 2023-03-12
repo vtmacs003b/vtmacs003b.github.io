@@ -1,0 +1,190 @@
+@charset "UTF-8";
+
+/* ログイン画面 */
+.login {
+  display: block;
+  width: 372px;
+  padding: 10px;
+  border: 1px solid #7f7f7f;
+  border-radius: 10px;
+  color: #000;
+  background: #fff;
+}
+
+/* スマホの画面 */
+.iphone {
+  display: block;
+  width: 372px;
+  padding: 10px;
+  border: 1px solid #7f7f7f;
+  border-radius: 10px;
+  color: #ffffff;
+  background: no-repeat url("background.png");
+}
+.iphone .row {
+  margin: 0 5px 0 5px;
+}
+#dock  {
+  border-radius: 30px;
+  background-color:  rgba(255,255,255,0.3);
+}
+.item  {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 20px 17px 0px 17px;
+  padding: 0;
+  border-radius: 10px;
+  color: #000000;
+  font-size: 2em;
+  background-color:  #ffffff;
+  opacity: 150%;
+}
+#dock .item  {
+  margin: 10px 17px 10px 17px;
+  padding: 0;
+}
+.no-item  {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 20px 17px 0px 17px;
+  padding: 0;
+  opacity: 0;
+}
+.item:hover {
+  cursor: grab;
+  filter: brightness(0.6);
+}
+.item:active {
+  cursor: grabbing;
+}
+.item-name  {
+  display: block;
+  width: 50px;
+  height: 20px;
+  margin: 5px 17px 0px 17px;
+  padding: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.5em;
+}
+.item-name:hover {
+  cursor: default;
+}
+.notch:hover {
+  cursor: default;
+}
+#camera {
+  color: #000000;
+  font-size: 2.2em;
+  background-color:  #d0d0d0;
+}
+#faketime {
+  color: #ffffff;
+  font-size: 2.2em;
+  background-color:  #00ee00;
+}
+#day {
+  font-size: 0.3em;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+#calendar {
+  margin-top: -10px;
+  padding-top:0px;
+}
+#mail {
+  color: #ffffff;
+  font-size: 2.1em;
+  background-color:  #0081f2;
+}
+#memo {
+  color: #ffd710;
+  font-size: 2.1em;
+  background-color:  #fff;
+}
+#clock {
+  background-color:  #000;
+}
+#analog{
+    height: 50px;
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+}
+#cast {
+  color: #ffffff;
+  font-size: 2.1em;
+  background-color:  #8a2be2;
+}
+#cart {
+  color: #ffffff;
+  font-size: 2.2em;
+  background-color:  #0081f2;
+}
+#map {
+  color: #ffffff;
+  font-size: 2em;
+  background-color:  #0081f2;
+}
+#heart {
+  color: #ff0000;
+  font-size: 1.5em;
+  background-color:  #fff;
+}
+#wallet {
+  color: #ffd710;
+  font-size: 2.1em;
+  background-color:  #000;
+}
+#gear {
+  color: #000000;
+  font-size: 2.3em;
+  background-color:  #d0d0d0;
+}
+#gear i {
+  position: relative;
+  top: -3px;
+}
+#tel {
+  color: #ffffff;
+  font-size: 2.2em;
+  background-color:  #00ee00;
+}
+#compass {
+  color: #0081f2;
+  font-size: 2.5em;
+  background-color:  #fff;
+}
+#compass i {
+  position: relative;
+  top: -4px;
+}
+#chat {
+  color: #ffffff;
+  font-size: 2.2em;
+  background-color:  #00ee00;
+}
+#music {
+  color: #ffffff;
+  font-size: 2.1em;
+  background-color:  #ee0000;
+}
+#search div {
+    margin: 10px auto 10px auto;
+    display: block;
+    border-radius: 10px;
+    background-color:  rgba(255,255,255,0.3);
+}
+#searchbox {
+  position: relative;
+  top: 4px;
+}
+#search div:hover {
+  cursor: grab;
+  background-color:  rgba(255,255,255,0.5);
+}
+#search div:active {
+  cursor: grabbing;
+}

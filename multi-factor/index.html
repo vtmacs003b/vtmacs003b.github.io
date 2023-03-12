@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<title>多要素認証</title>
+
+		<link rel="shortcut icon" href="../favicon.ico" type="image/vnd.microsoft.icon">
+		<link rel="icon" href="https://vtmacs003b.github.io/favicon.ico" type="image/vnd.microsoft.icon">
+		<link rel="apple-touch-icon-precomposed" href="../favicon-152.png">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="../favicon-144.png">
+
+		<meta property="og:title" content="多要素認証">
+		<meta property="og:type" content="website">
+		<meta property="og:locale" content="ja_JP">
+		<meta property="og:site_name" content="多要素認証">
+		<meta property="og:url" content="https://vtmacs003b.github.io/password/">
+		<meta property="og:image" content="https://vtmacs003b.github.io/password/password.png">
+		<meta property="og:description" content="パスワードをチェックできるサイトです。">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" integrity="sha384-l4UPAMHGzl7zwogLW4nOwaU2XTk6oiM1jhCRQstZEndoIiA2I5bg6fST3wzBSRBD" crossorigin="anonymous">
+		<link href="style.css" rel="stylesheet">
+
+	</head>
+	<body>
+	<header>
+	<nav class="navbar fixed-top navbar-expand-lg" style="background-color: #e3f2fd;">
+		<div class="container-fluid">
+			<a href="../index.html" class="navbar-brand">
+			<img src="../favicon.png" width="25" height="25" class="d-inline-block align-top" alt="M">
+			多要素認証について</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbar-header">
+				<ul class="navbar-nav">
+				<li class="nav-item"><a href="#words" class="nav-link"><i class="bi bi-key"></i>使える文字</a></li>
+				<li class="nav-item"><a href="#time" class="nav-link"><i class="bi bi-stopwatch"></i>組み合わせと解読時間</a></li>
+				<li class="nav-item"><a href="#check" class="nav-link"><i class="bi bi-shield-check"></i>パスワードチェック</a></li>
+				<li class="nav-item"><a href="#calc" class="nav-link"><i class="bi bi-calculator"></i></i>計算回数について</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	</header>
+
+	<article id="app">
+	<div class="container">
+		<div class="bg-light p-4 p-sm-5 my-4 rounded">
+		<!--
+			<img src="https://vtmacs003b.github.io/password/password.png" class="img-fluid">
+		-->
+			<h1 class="display-4">多要素認証</h1>
+			<p class="lead">
+				多要素認証について
+			</p>
+			<!--
+			<a class="btn btn-primary btn-lg" href="#words" role="button"><i class="bi bi-key"></i>使える文字</a>&nbsp;
+			<a class="btn btn-primary btn-lg" href="#time" role="button"><i class="bi bi-stopwatch"></i>組み合わせと解読時間</a>&nbsp;
+			<a class="btn btn-primary btn-lg" href="#check" role="button"><i class="bi bi-shield-check"></i>パスワードチェック</a>&nbsp;
+			<a class="btn btn-primary btn-lg" href="#calc" role="button"><i class="bi bi-calculator"></i>計算回数について</a>&nbsp;
+		-->
+		</div>
+	</div>
+
+	<hr>
+
+	<div id="words" class="container">
+		<h2><i class="bi bi-key-fill"></i>多要素認証（スマホ）<i class="bi bi-key-fill"></i></h2>
+		<div class="row">
+			<div class="col-sm-6" id="PC1">
+				ログイン画面
+				<div class="login">
+					<div class="row align-items-center text-center">
+						<div class="col-12 ">
+						<h2>ログイン</h2>
+						</div>
+						<div class="col-12 form-label-group">
+							<label for="floatingInput" class="form-label">ユーザーID</label>
+							<input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+						</div>
+						<div class="col-12 form-label-group">
+						<label for="inputPassword" class="form-label">パスワード</label>
+						<input type="password" id="floatingPassword" class="form-control" placeholder="パスワード">
+						</div>
+						<div class="col-12">
+						<button type="submit" class="btn btn-primary">ログイン</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6" class="SP1">
+				スマホの画面
+				<div class="iphone">
+					<div class="row notch">
+						<div class="col-4" v-show="clock">
+							{{ clock }} <i class="bi bi-cursor-fill"></i>
+						</div>
+						<div class="col-4">
+							&nbsp;
+						</div>
+						<div class="col-4 text-end">
+							<i class="bi bi-reception-3"></i> <i class="bi bi-wifi"></i> <i class="bi bi-battery-half"></i>
+						</div>
+					</div>
+
+					<div class="row align-items-center text-center">
+						<div id="faketime" class="col-3 item">
+							<i class="bi bi-camera-video-fill"></i>
+						</div>
+						<div class="col-3 item">
+							<div id="day">{{ day }} </div>
+							<div id="calendar">{{ calendar }}</div>
+						</div>
+						<div class="col-3 item">
+							<img src="picture.png" width="50">
+						</div>
+						<div id="camera" class="col-3 item">
+							<i class="bi bi-camera-fill"></i>
+						</div>
+					</div>
+					<div class="row align-items-center text-center">
+						<div class="col-3 item-name">
+							FakeTime
+						</div>
+						<div class="col-3 item-name">
+							カレンダー
+						</div>
+						<div class="col-3 item-name">
+							写真
+						</div>
+						<div class="col-3 item-name">
+							カメラ
+						</div>
+					</div>
+
+					<div class="row align-items-center text-center">
+						<div id="mail" class="col-3 item">
+							<i class="bi bi-envelope-fill"></i>
+						</div>
+						<div id="memo" class="col-3 item">
+							<i class="bi bi-file-earmark-text-fill"></i>
+						</div>
+						<div class="col-3 item">
+							<i class="bi bi-list-ul"></i>
+						</div>
+						<div id="clock" class="col-3 item">
+							<div id="analog"></div>
+						</div>
+					</div>
+					<div class="row align-items-center text-center">
+						<div class="col-3 item-name">
+							メール
+						</div>
+						<div class="col-3 item-name">
+							メモ
+						</div>
+						<div class="col-3 item-name">
+							リマインダー
+						</div>
+						<div class="col-3 item-name">
+							時計
+						</div>
+					</div>
+
+					<div class="row align-items-center text-center">
+						<div class="col-3 item">
+							<i class="bi bi-tv-fill"></i>
+						</div>
+						<div id="cast" class="col-3 item">
+							<i class="bi bi-broadcast-pin"></i>
+						</div>
+						<div id="cart" class="col-3 item">
+							<i class="bi bi-cart4"></i>
+						</div>
+						<div id="map" class="col-3 item">
+							<i class="bi bi-geo-alt-fill"></i>
+						</div>
+					</div>
+					<div class="row align-items-center text-center">
+						<div class="col-3 item-name">
+							TV
+						</div>
+						<div class="col-3 item-name">
+							キャスト
+						</div>
+						<div class="col-3 item-name">
+							Apps
+						</div>
+						<div class="col-3 item-name">
+							マップ
+						</div>
+					</div>
+
+					<div class="row align-items-center text-center">
+						<div id="heart" class="col-3 item">
+							<i class="bi bi-heart-fill"></i>
+						</div>
+						<div id="wallet" class="col-3 item">
+							<i class="bi bi-wallet2"></i>
+						</div>
+						<div id="gear" class="col-3 item">
+							<i class="bi bi-gear-fill"></i>
+						</div>
+						<div id="map" class="col-3 no-item">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row align-items-center text-center">
+						<div class="col-3 item-name">
+							ヘルスケア
+						</div>
+						<div class="col-3 item-name">
+							ウォレット
+						</div>
+						<div class="col-3 item-name">
+							設定
+						</div>
+						<div class="col-3 item-name">
+							&nbsp;
+						</div>
+					</div>
+
+					<div class="row align-items-center text-center">
+						<div id="map" class="col-3 no-item">
+							&nbsp;
+						</div>
+						<div id="map" class="col-3 no-item">
+							&nbsp;
+						</div>
+						<div id="map" class="col-3 no-item">
+							&nbsp;
+						</div>
+						<div id="map" class="col-3 no-item">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row align-items-center text-center">
+						<div class="col-3 item-name">
+							&nbsp;
+						</div>
+						<div class="col-3 item-name">
+							&nbsp;
+						</div>
+						<div class="col-3 item-name">
+							&nbsp;
+						</div>
+						<div class="col-3 item-name">
+							&nbsp;
+						</div>
+					</div>
+
+					<div id="search" class="row align-items-center text-center">
+						<div class="col-12 item-name">
+						<span id="searchbox"><i class="bi bi-search"></i>検索</span>
+						</div>
+					</div>
+
+					<div id="dock" class="row align-items-center text-center">
+						<div id="tel" class="col-3 item">
+							<i class="bi bi-telephone-fill"></i>
+						</div>
+						<div id="compass" class="col-3 item">
+							<i class="bi bi-compass-fill"></i>
+						</div>
+						<div id="chat" class="col-3 item">
+							<i class="bi bi-chat-fill"></i>
+						</div>
+						<div id="music" class="col-3 item">
+							<i class="bi bi-music-note-beamed"></i>
+						</div>
+					</div>
+
+				</div><!-- iphone -->
+			</div>
+		</div>
+	</div><!-- #words -->
+
+	</article>
+
+	<footer class="bd-footer text-muted">
+	<div class="container-fluid text-center">
+		<hr>
+		<p>
+			Copyright © 2001- MACS-Project All Rights Reserved.
+		</p>
+	</div>
+	</footer>
+
+	<script src="https://unpkg.com/vue@3.2.36"></script>
+	<script src="./clock.js"></script>
+	<script>
+	Vue.createApp({
+		data() {
+			return {
+				clock: "00:00", // 時計の文字列
+				day: "日", // 曜日の文字列
+				calendar: "12",// 日にちの文字列
+			}
+		},
+		created() {
+			this.tick();
+		},
+		methods:{
+			tick(){// 現在時刻を取得する関数
+				const date = new Date();  // Dateオブジェクトを作る
+				let h = date.getHours();  // 時
+				let m = date.getMinutes();// 分
+				// let s = date.getSeconds();// 秒
+				let d = date.getDate(); // 日
+				let day_n = date.getDay(); // 曜日（数字）
+				let day_array = ["日","月","火","水","木","金","土"]
+				
+				if(h < 10) h = " " + h;   // 10未満であれば頭に0を付ける
+				if(m < 10) m = "0" + m;
+				// if(s < 10) s = "0" + s;
+				this.clock = h + ":" + m ; // + ":" + s;// 文字列を結合する
+				this.calendar= d;
+				this.day = day_array[day_n];
+
+				// 100ミリ秒経ったら1度だけ実行する
+				setTimeout(()=>{
+					this.tick();// tick関数を実行する
+				}, 100);
+			}
+		},
+		computed: {
+			
+		}
+	}).mount('#app')
+
+	// 文字の種類から場合の数を返す。
+	function checked2num(c) {
+		let n = 0n
+		if(c.includes("num")) n+= 10n
+		if(c.includes("low")) n+= 26n
+		if(c.includes("upp")) n+= 26n
+		if(c.includes("sym")) n+= 32n
+		return n;
+	}
+
+	// 桁の大きな数値を万進の表記に変換して表示。https://memo.ag2works.tokyo/post-4722/
+	function ag2manshin(a){
+		//数値に変換できなかった場合
+		if(isNaN(Number(a))) return console.log('Error : Not a Number.');
+		//1万未満の場合
+		if(Number(a) < 10000n) return a;
+
+		//ゼロサプレスを行う関数
+		let ag2zeroSuppress = n => {
+			let i = 0;
+			while (n.toString().charAt(i) === '0') i++;
+			return n.toString().slice(i);
+		}
+
+		let hiNum, lowNum, pointNum, manshinUnit, manshinUnitLen;
+
+		manshinUnit = ['万','億','兆','京','垓','𥝱','穣','溝','澗','正','載','極','恒河沙','阿僧祇','那由他','不可思議','無量大数'];
+		manshinUnitLen = manshinUnit.length;
+
+		//小数点を含めている場合
+		if(a.toString().split('.').length > 1){
+			pointNum = '.' + a.toString().split('.')[1];
+			a = a.toString().split('.')[0];
+		} else {
+			pointNum = '';
+		}
+
+		hiNum = a;
+		lowNum = '';
+		
+		for(let i = 0, j = 0, k = (a / 10000n); j < manshinUnitLen &&  k >= 1n; i++, j++, k /= 10000n){
+			//下4桁をチェックして処理
+			//4桁とも0の場合は万進の単位を削除
+			if(i > 0 && !ag2zeroSuppress(hiNum.toString().slice(-4))) lowNum = lowNum.toString().slice(1);
+			//1文字目に万進の単位、後ろに処理済みの下4桁を付けて保持
+			lowNum = manshinUnit[i] + ag2zeroSuppress(hiNum.toString().slice(-4)) + lowNum;
+
+			//下4桁を削除して保持
+			hiNum = hiNum.toString().slice(0,-4);
+		}
+
+		//変換した表記の文字列を返す
+		return hiNum + lowNum + pointNum;
+	}
+	function makeTime(num) {
+		let y = num / (365n*24n*3600n);
+		let d = num % (365n*24n*3600n) / (24n*3600n) | 0n;
+		let h = num % (24n*3600n) / 3600n | 0n;
+		let m =num % 3600n / 60n | 0n; 
+		let s = num % 60n; 
+		if(y > 10000) {
+			return "約" + ag2manshin(y) + "年";
+		} else if(y != 0) {
+			return y + "年" + d + "日" + h + "時間" + m + "分" + s + "秒";
+		} else if(d != 0)  {
+			return d + "日" + h + "時間" + m + "分" + s + "秒";
+		} else if(h != 0)  {
+			return h + "時間" + m + "分" + s + "秒";
+		} else if(m != 0)  {
+			return m + "分" + s + "秒";
+		} else if(s != 0)  {
+			return s + "秒";
+		} else {
+			return "1 秒未満";
+		}
+	}
+	</script>
+
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90731510-1', 'auto');
+  ga('send', 'pageview');
+
+	</script>
+	</body>
+</html>
