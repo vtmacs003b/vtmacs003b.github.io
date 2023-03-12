@@ -74,22 +74,32 @@
 			<div class="col-sm-6" id="PC1">
 				ログイン画面
 				<div class="login">
-					<div class="row align-items-center text-center">
+					<form class="row align-items-center text-center needs-validation">
 						<div class="col-12 ">
 						<h2>ログイン</h2>
 						</div>
 						<div class="col-12 form-label-group">
 							<label for="floatingInput" class="form-label">ユーザーID</label>
-							<input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+							<div class="input-group">
+								<input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+								 <div class="invalid-feedback">
+								 ユーザー名を選択して下さい。
+								 </div>
+							</div>
 						</div>
 						<div class="col-12 form-label-group">
 						<label for="inputPassword" class="form-label">パスワード</label>
-						<input type="password" id="floatingPassword" class="form-control" placeholder="パスワード">
+							<div class="input-group">
+								<input type="password" id="floatingPassword" class="form-control" placeholder="パスワード" required>
+								<div class="invalid-feedback">
+								パスワードを入力してください。
+								</div>
+							</div>
 						</div>
 						<div class="col-12">
 						<button type="submit" class="btn btn-primary">ログイン</button>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 			<div class="col-sm-6" class="SP1">
@@ -293,6 +303,24 @@
 	<script src="https://unpkg.com/vue@3.2.36"></script>
 	<script src="https://vtmacs003b.github.io//multi-factor/clock.js"></script>
 	<script>
+	(() => {
+		'use strict'
+
+		// Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
+		const forms = document.querySelectorAll('.needs-validation')
+
+		// ループして帰順を防ぐ
+		Array.from(forms).forEach(form => {
+			form.addEventListener('submit', event => {
+				if (!form.checkValidity()) {
+					event.preventDefault()
+					event.stopPropagation()
+				}
+
+				form.classList.add('was-validated')
+			}, false)
+		})
+	})()
 	Vue.createApp({
 		data() {
 			return {
