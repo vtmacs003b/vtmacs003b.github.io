@@ -10,9 +10,17 @@
   color: #000;
   background: #fff;
 }
-
+.SP1 {
+  position: relative;
+  width: 396px;
+  height: 632px;
+}
 /* スマホの画面 */
 .iphone {
+  position: absolute;
+  top: 0px;
+  left:  0px;
+  z-index: 10;
   display: block;
   width: 372px;
   padding: 10px;
@@ -97,7 +105,8 @@
 #mail {
   color: #ffffff;
   font-size: 2.1em;
-  background-color:  #0081f2;
+  background: #0081f2;
+  background: linear-gradient(#4169E1, lightskyblue);
 }
 #memo {
   color: #ffd710;
@@ -121,7 +130,8 @@
 #cart {
   color: #ffffff;
   font-size: 2.2em;
-  background-color:  #0081f2;
+  background:  #0081f2;
+  background: linear-gradient(lightskyblue, #4169E1);
 }
 #map {
   color: #ffffff;
@@ -155,7 +165,7 @@
 #compass {
   color: #0081f2;
   font-size: 2.5em;
-  background-color:  #fff;
+  background:  #fff;
 }
 #compass i {
   position: relative;
@@ -187,4 +197,50 @@
 }
 #search div:active {
   cursor: grabbing;
+}
+/* モーダルウィンドウを開く要素 */
+.modal_open_btn {
+  display: inline-block;
+  cursor: pointer;
+  padding-top: 30px;
+}
+/* モーダルウィンドウ要素 */
+#modal {
+  position: relative;
+  width: 396px;
+  height: 632px;
+}
+.modal_contents {
+  z-index:100;
+  width: 100%;
+  height: 100%;
+  width: 100%;
+}
+/* モーダルウィンドウの背景要素 */
+.modal_contents_bg {
+  position: relative;
+  z-index:50;
+  border-radius: 10px;
+  background: rgba(0,0,0,.6);
+  width: 100%;
+  height: 100%;
+}
+/* モーダルウィンドウの中身*/
+.modal_contents_wrap {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  z-index:100;
+  border-radius: 10px;
+  color: #000;
+  background-color: #fff;
+  width: 50%;
+  margin: auto;
+}
+/* モーダルウィンドウを閉じる要素 */
+.modal_close_btn {
+  display: inline-block;
+  color: #000;
+  cursor: pointer;
+  margin-top: 10px;
 }
