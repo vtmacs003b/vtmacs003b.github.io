@@ -22,7 +22,8 @@
 		<meta property="og:description" content="パスワードをチェックできるサイトです。">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" integrity="sha384-l4UPAMHGzl7zwogLW4nOwaU2XTk6oiM1jhCRQstZEndoIiA2I5bg6fST3wzBSRBD" crossorigin="anonymous">
-		<link href="https://vtmacs003b.github.io//multi-factor/style.css" rel="stylesheet">
+		<link href="https://vtmacs003b.github.io//multi-factor/style.css" rel="stylesheet"> 
+		<!--<link href="style.css" rel="stylesheet">-->
 
 	</head>
 	<body>
@@ -69,41 +70,125 @@
 	<hr>
 
 	<div id="words" class="container">
-		<h2><i class="bi bi-key-fill"></i>多要素認証（スマホ）<i class="bi bi-key-fill"></i></h2>
+		<h2><i class="bi bi-key-fill"></i>多要素認証（スマホ）シミュレーター<i class="bi bi-key-fill"></i></h2>
 		<div class="row">
-			<div class="col-sm-6" id="PC1">
+			<div class="col-md-6" id="PC1">
 				ログイン画面
 				<div class="login">
-					<form class="row align-items-center text-center needs-validation">
+					<form class="row align-items-center text-center"  v-show="login1" >
 						<div class="col-12 ">
 						<h2>ログイン</h2>
 						</div>
 						<div class="col-12 form-label-group">
-							<label for="floatingInput" class="form-label">ユーザーID</label>
+							<label for="userID" class="form-label">ユーザーID</label>
 							<div class="input-group">
-								<input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
-								 <div class="invalid-feedback">
-								 ユーザー名を選択して下さい。
-								 </div>
+								<p><input type="email" class="form-control" id="userID" placeholder="name@example.com" name="email" v-model="email"></p>
+								<p v-if="isInValidEmail" class="error">メールアドレスを入力してください。</p>
 							</div>
 						</div>
 						<div class="col-12 form-label-group">
 						<label for="inputPassword" class="form-label">パスワード</label>
 							<div class="input-group">
-								<input type="password" id="floatingPassword" class="form-control" placeholder="パスワード" required>
-								<div class="invalid-feedback">
-								パスワードを入力してください。
-								</div>
+								<p><input type="password" id="floatingPassword" class="form-control" placeholder="パスワード" name="pass" v-model="pass" ></p>
+								<p v-if="isInValidPass" class="error">パスワードは4文字以上です。</p>
 							</div>
 						</div>
 						<div class="col-12">
-						<button type="submit" class="btn btn-primary">ログイン</button>
+						<!-- Button trigger modal -->
+						<span v-on:click="open1" class="btn btn-primary">ログイン</span>
+						</div>
+						<div class="col-12">
+						<p>
+						※これはあくまでもシミュレーターなので、ユーザーIDは任意のメールアドレス（実在しなくてもメールアドレスの形式になっていれば動作します）、パスワードは４文字以上の半角文字が入力されれば、ログインできます。
+						</p>
+						<p>
+						※最初は、任意のユーザーIDとパスワードが入力された状態になっています。<span class="danger">赤い文字</span>が出るとログインできませんので、注意してください。
+						</p>
+						<p>
+						※入力された文字列が実際に外部に発信されることはありません。
+						</p>
 						</div>
 					</form>
+
+					<div class="row" v-show="login2">
+						<div class="col-12">
+						<h2 class="text-center">コードの確認中</h2>
+						<p class="text-center">
+							<div class="input-group">
+							<input type="text" size="1"  maxlength="1" class="form-control" v-model="code1" ref="codeR1" >
+							<input type="text" size="1"  maxlength="1" class="form-control" v-model="code2" ref="codeR2" >
+							<input type="text" size="1"  maxlength="1" class="form-control" v-model="code3" ref="codeR3" >
+							&nbsp; &nbsp;
+							<input type="text" size="1"  maxlength="1" class="form-control" v-model="code4" ref="codeR4" >
+							<input type="text" size="1"  maxlength="1" class="form-control" v-model="code5" ref="codeR5" >
+							<input type="text" size="1"  maxlength="1" class="form-control" v-model="code6" ref="codeR6" >
+							</div>
+						</p>
+						<p>確認コードを含むテキストメッセージをご利用のデバイスに送信しました。続けるにはコードを入力してください。</p>
+						<p>
+						コードが届かない場合は、
+						<a v-on:click="open1" class="reload">コードを再送信</a>
+						してください。
+						</p>
+						</div>
+					</div>
+
+					<div class="row" v-show="login3">
+						<div class="col-12">
+						<h2 class="text-center">コードの確認完了</h2>
+						<div class="text-center">
+							<p class="display-5">
+							ログイン<br>できました！
+							</p>
+							<p>
+							<a onclick="window.location.reload(true);" class="reload">画面をもとに戻す（再読込）</a>
+							</p>
+						</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
-			<div class="col-sm-6" class="SP1">
+			<div class="col-md-6">
 				スマホの画面
+			<div class="SP1">
+				<div id="modal1" v-show="show1" class="row modal_contents col-12">
+					<!-- Modal Window -->
+					<div class="col-12">
+						<!-- モーダルウィンドウの背景 -->
+						<div v-on:click="close" class="modal_contents_bg"></div>
+						<!--   モーダルウィンドウの中身   -->
+						<div class="modal_contents_wrap">
+							 <p class="text-center">ログインが要求されました。</p>
+							 <p class="text-center"><strong>{{ email }} </strong></p>
+							 <p class="text-center">ご利用の ユーザーID がデバイス {{ userAgent }} にログインするために使用されています。
+							<!--   モーダルウィンドウを閉じる   -->
+							<p class="border-top border-2 text-center mt-0 mb-0 p-0">
+	        				 	<span v-on:click="close" class="modal_close_btn pt-2 pe-4">許可しない</span>
+    	    				 	<span v-on:click="open2" class="modal_open_btn pt-2 ps-4 pb-2 border-start border-2"><strong>許可する</strong></span>
+        				 	</p>
+						</div>
+					 </div>
+				</div>
+				<div id="modal2" v-show="show2" class="row modal_contents col-12">
+					<!-- Modal Window -->
+					<div class="col-12">
+						<!-- モーダルウィンドウの背景 -->
+						<div v-on:click="close" class="modal_contents_bg"></div>
+						<!--   モーダルウィンドウの中身   -->
+						<div class="modal_contents_wrap">
+							 <p class="text-center">確認コード</p>
+							 <p class="text-center">ログインするには、 Webブラウザでこの確認コードを入力してください。</p>
+							 <p class="text-center display-4"><strong>{{ code }}</strong></p>
+							 <p class="text-center">他のユーザーと共有しないでください。</p>
+							 <p class="text-center">我々がこのコードについて電話で問い合わせたり SMS を送信したりすることはありません。
+							<!--   モーダルウィンドウを閉じる   -->
+        				 	<p v-on:click="close" class="modal_close_btn text-center border-top border-2 pt-2 pb-2"><strong>OK</strong></p>
+						</div>
+					 </div>
+				</div>
+
+
 				<div class="iphone">
 					<div class="row notch">
 						<div class="col-4" v-show="clock">
@@ -285,6 +370,7 @@
 					</div>
 
 				</div><!-- iphone -->
+			</div><!-- SP1 -->
 			</div>
 		</div>
 	</div><!-- #words -->
@@ -303,34 +389,49 @@
 	<script src="https://unpkg.com/vue@3.2.36"></script>
 	<script src="https://vtmacs003b.github.io//multi-factor/clock.js"></script>
 	<script>
-	(() => {
-		'use strict'
-
-		// Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
-		const forms = document.querySelectorAll('.needs-validation')
-
-		// ループして帰順を防ぐ
-		Array.from(forms).forEach(form => {
-			form.addEventListener('submit', event => {
-				if (!form.checkValidity()) {
-					event.preventDefault()
-					event.stopPropagation()
-				}
-
-				form.classList.add('was-validated')
-			}, false)
-		})
-	})()
 	Vue.createApp({
 		data() {
 			return {
 				clock: "00:00", // 時計の文字列
 				day: "日", // 曜日の文字列
 				calendar: "12",// 日にちの文字列
+				//デフォルトはモーダルウィンドウを閉じる
+				show1: false,
+				show2: false,
+				// ログイン画面は見えるようにする
+				login1: true,
+				login2: false,
+				login3: false,
+				// ユーザーIDの確認
+				email: "name@example.com",
+				pass: "1234",
+				email_valid: false,
+				pass_valid: false,
+				userAgent: window.navigator.userAgent.toLowerCase(),
+				code: "000 000",
+				num: [],
+				code1: "",
+				codeR1: "",
+				code2: "",
+				codeR2: "",
+				code2: "",
+				codeR2: "",
+				code3: "",
+				codeR3: "",
+				code4: "",
+				codeR4: "",
+				code5: "",
+				codeR5: "",
+				code6: "",
+				codeR6: "",
+				flag: [false, false, false, false, false, false],
 			}
 		},
 		created() {
+			// 時計の秒針を進める
 			this.tick();
+			// コードを生成する
+			this.makeCode();
 		},
 		methods:{
 			tick(){// 現在時刻を取得する関数
@@ -353,89 +454,86 @@
 				setTimeout(()=>{
 					this.tick();// tick関数を実行する
 				}, 100);
+			},
+			// 確認コードを生成
+			makeCode(){
+				let num = this.num;
+				for(let i=0; i<6; i++){
+					num[i] = Math.floor(Math.random() * 10);
+					if(num[i] == 10 || num[i] == 0) num[i] = "0";
+				}
+				this.code = String(num[0]) + num[1] + num[2] + " " + num[3] + num[4] + num[5];
+			},
+			// ログインボタンを押すとモーダルウィンドウ１を開く
+			open1: function(){
+				// ユーザーID とパスワードもバリデーションが真なら
+				if(this.email_valid && this.pass_valid) {
+					// モーダルウインドウを開く
+					this.show1 = true;
+					this.show2 = false;
+					// ログイン画面を切り替える
+					this.login1 = false;
+					this.login2 = true;
+				}
+			},
+			// モーダルウインドウ１で「許可する」とモーダルウインドウ２を開く
+			open2: function(){
+				this.show1 = false
+				this.show2 = true
+			},
+			//モーダルウィンドウを閉じる
+			close: function(){
+				this.show1 = false
+				this.show2 = false
+			},
+			// コードが合っているかチェック
+			isFlagCheck() {
+				if(this.code1 == this.num[0]) { this.flag[0] = true; }
+				if(this.code2 == this.num[1]) { this.flag[1] = true; }
+				if(this.code3 == this.num[2]) { this.flag[2] = true; }
+				if(this.code4 == this.num[3]) { this.flag[3] = true; }
+				if(this.code5 == this.num[4]) { this.flag[4] = true; }
+				if(this.code6 == this.num[5]) { this.flag[5] = true; }
+				if(this.flag[0] && this.flag[1] && this.flag[2] && this.flag[3] & this.flag[4] && this.flag[5]) {
+					this.login3 = true;
+					this.login2 = false;
+					this.login1 = false;
+				}
 			}
 		},
+		watch: {
+			// コードの入力を監視
+			code1:  function(v) { if(v.length >= 1) { this.$refs.codeR2.focus() } this.isFlagCheck() },
+			code2:  function(v) { if(v.length >= 1) { this.$refs.codeR3.focus() } this.isFlagCheck() },
+			code3:  function(v) { if(v.length >= 1) { this.$refs.codeR4.focus() } this.isFlagCheck() },
+			code4:  function(v) { if(v.length >= 1) { this.$refs.codeR5.focus() } this.isFlagCheck() },
+			code5:  function(v) { if(v.length >= 1) { this.$refs.codeR6.focus() } this.isFlagCheck() },
+			code6:  function(v) { this.isFlagCheck() },
+		},
 		computed: {
-			
+			isInValidEmail(){
+				//メールアドレスとして判定される文字列と記号の組み合わせを定数化
+				const reg = new RegExp(/^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/);
+				//指定した組み合わせになっていなかった場合判定を返す。
+				if(reg.test(this.email))  {
+					this.email_valid = true;
+				} else {
+					this.email_valid = false;
+				}
+				return !reg.test(this.email);	
+			},
+			isInValidPass(){
+				//文字列が4文字以上かチェックする
+				if(this.pass.length > 3) {
+					this.pass_valid = true;
+				} else {
+					this.pass_valid = false;
+				}
+				return this.pass.length < 4;
+			},
 		}
 	}).mount('#app')
 
-	// 文字の種類から場合の数を返す。
-	function checked2num(c) {
-		let n = 0n
-		if(c.includes("num")) n+= 10n
-		if(c.includes("low")) n+= 26n
-		if(c.includes("upp")) n+= 26n
-		if(c.includes("sym")) n+= 32n
-		return n;
-	}
-
-	// 桁の大きな数値を万進の表記に変換して表示。https://memo.ag2works.tokyo/post-4722/
-	function ag2manshin(a){
-		//数値に変換できなかった場合
-		if(isNaN(Number(a))) return console.log('Error : Not a Number.');
-		//1万未満の場合
-		if(Number(a) < 10000n) return a;
-
-		//ゼロサプレスを行う関数
-		let ag2zeroSuppress = n => {
-			let i = 0;
-			while (n.toString().charAt(i) === '0') i++;
-			return n.toString().slice(i);
-		}
-
-		let hiNum, lowNum, pointNum, manshinUnit, manshinUnitLen;
-
-		manshinUnit = ['万','億','兆','京','垓','𥝱','穣','溝','澗','正','載','極','恒河沙','阿僧祇','那由他','不可思議','無量大数'];
-		manshinUnitLen = manshinUnit.length;
-
-		//小数点を含めている場合
-		if(a.toString().split('.').length > 1){
-			pointNum = '.' + a.toString().split('.')[1];
-			a = a.toString().split('.')[0];
-		} else {
-			pointNum = '';
-		}
-
-		hiNum = a;
-		lowNum = '';
-		
-		for(let i = 0, j = 0, k = (a / 10000n); j < manshinUnitLen &&  k >= 1n; i++, j++, k /= 10000n){
-			//下4桁をチェックして処理
-			//4桁とも0の場合は万進の単位を削除
-			if(i > 0 && !ag2zeroSuppress(hiNum.toString().slice(-4))) lowNum = lowNum.toString().slice(1);
-			//1文字目に万進の単位、後ろに処理済みの下4桁を付けて保持
-			lowNum = manshinUnit[i] + ag2zeroSuppress(hiNum.toString().slice(-4)) + lowNum;
-
-			//下4桁を削除して保持
-			hiNum = hiNum.toString().slice(0,-4);
-		}
-
-		//変換した表記の文字列を返す
-		return hiNum + lowNum + pointNum;
-	}
-	function makeTime(num) {
-		let y = num / (365n*24n*3600n);
-		let d = num % (365n*24n*3600n) / (24n*3600n) | 0n;
-		let h = num % (24n*3600n) / 3600n | 0n;
-		let m =num % 3600n / 60n | 0n; 
-		let s = num % 60n; 
-		if(y > 10000) {
-			return "約" + ag2manshin(y) + "年";
-		} else if(y != 0) {
-			return y + "年" + d + "日" + h + "時間" + m + "分" + s + "秒";
-		} else if(d != 0)  {
-			return d + "日" + h + "時間" + m + "分" + s + "秒";
-		} else if(h != 0)  {
-			return h + "時間" + m + "分" + s + "秒";
-		} else if(m != 0)  {
-			return m + "分" + s + "秒";
-		} else if(s != 0)  {
-			return s + "秒";
-		} else {
-			return "1 秒未満";
-		}
-	}
 	</script>
 
 	<script>
