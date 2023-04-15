@@ -86,12 +86,19 @@
 #camera {
   color: #000000;
   font-size: 2.2em;
-  background-color:  #d0d0d0;
+  background: linear-gradient(#eee, #999);
 }
 #faketime {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(#00ee00, #00aa00);
+}
+#faketime-text {
   color: #ffffff;
-  font-size: 2.2em;
-  background-color:  #00ee00;
+  background: linear-gradient(#fff, 65%, #009900, #006600, #003300);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 #day {
   font-size: 0.3em;
@@ -106,10 +113,11 @@
   color: #ffffff;
   font-size: 2.1em;
   background: #0081f2;
-  background: linear-gradient(#4169E1, lightskyblue);
+  background: linear-gradient(dodgerblue, powderblue);
+  //text-shadow:2px 2px 10px #999;
 }
 #memo {
-  color: #ffd710;
+  color: #ffd700;
   font-size: 2.1em;
   background-color:  #fff;
 }
@@ -122,16 +130,26 @@
     width: 100%;
     border-radius: 10px;
 }
+#TV {
+  color: #ffffff;
+  background: #000000;
+  background: linear-gradient(#666, #000);
+}
 #cast {
   color: #ffffff;
   font-size: 2.1em;
   background-color:  #8a2be2;
 }
-#cart {
+#apps {
   color: #ffffff;
-  font-size: 2.2em;
+  font-size: 2.7em;
+  font-family: 'Shantell Sans', cursive;
   background:  #0081f2;
-  background: linear-gradient(lightskyblue, #4169E1);
+  background: linear-gradient(powderblue, royalblue);
+}
+#apps-text {
+  position: relative;
+  top: -7px;
 }
 #map {
   color: #0081f2;
@@ -144,14 +162,14 @@
   background-color:  #fff;
 }
 #wallet {
-  color: #ffd710;
-  font-size: 2.1em;
-  background-color:  #000;
+  color: #ffd700;
+  background: #000000;
+  background: linear-gradient(#666, #000);
 }
 #gear {
   color: #000000;
   font-size: 2.3em;
-  background-color:  #d0d0d0;
+  background: linear-gradient(#eee, #999);
 }
 #gear i {
   position: relative;
@@ -161,25 +179,32 @@
   color: #ffffff;
   font-size: 2.2em;
   background-color:  #00ee00;
+  background: linear-gradient(#66ff66, #00cc00);
 }
 #compass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #0081f2;
   font-size: 2.5em;
   background:  #fff;
 }
-#compass i {
-  position: relative;
-  top: -4px;
+#compass-text {
+  background: linear-gradient(225deg, lightskyblue, royalblue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 #chat {
   color: #ffffff;
   font-size: 2.2em;
   background-color:  #00ee00;
+  background: linear-gradient(#66ff66, #00cc00);
 }
 #music {
   color: #ffffff;
   font-size: 2.1em;
   background-color:  #ee0000;
+  background: linear-gradient(#f99, #ee0000);
 }
 #search div {
     margin: 10px auto 10px auto;
