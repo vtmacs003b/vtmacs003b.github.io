@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<title>ID&PW教育</title>
+		<title>ID&PW教育 > 第２章　セキュリティを学ぶ必要性</title>
 
 		<link rel="shortcut icon" href="../favicon.ico" type="image/vnd.microsoft.icon">
 		<link rel="icon" href="https://vtmacs003b.github.io/favicon.ico" type="image/vnd.microsoft.icon">
@@ -50,118 +50,227 @@
 	<article id="app">
 	<div class="container">
 		<div class="bg-light p-4 p-sm-5 my-4 rounded">
-			<img src="https://vtmacs003b.github.io/password/password.png" class="img-fluid">
-			<h1 class="display-4">ID・パスワード教育</h1>
-			<p class="lead">
-				本サイトの目的は、学校関係者がIDやパスワードの理解を深めることです。  <br>
-				対象者 ：
-				<ul>
-				<li>IDやパスワードの基本的な知識を得たい先生 </li>
-				<li>IDやパスワードの指導方法に悩んでいる先生 </li>
-				<li>学校のセキュリティ意識を高めたい管理職の方<br>
-				 ICT教育に携わる全ての学校関係者 </li>
-				</ul>
-				本サイトを通して学べること：
-				<ul>
-				<li>セキュリティを学ぶ必要性 </li>
-				<li>IDやパスワードの基本的な知識 </li>
-				<li>IDやパスワードを教育する際の考え方・方法 </li>
-				</ul>
-				本サイトをIDやパスワードの研修教材として利用することで、学校のセキュリティを向上させ、デジタルを活用した学びの促進に活用することができます。  
-			</p>
-			<a class="btn btn-primary btn-lg" href="#first" role="button"><i class="bi bi-magic"></i></i>はじめに</a>&nbsp;
-			<a class="btn btn-primary btn-lg" href="#security" role="button"><i class="bi bi-shield-fill-exclamation"></i>セキュリティを学ぶ必要性</a>&nbsp;
-			<a class="btn btn-primary btn-lg" href="#idpw" role="button"><i class="bi bi-key-fill"></i>IDPWの基本知識</a>&nbsp;
-			<a class="btn btn-primary btn-lg" href="#education" role="button"><i class="bi bi-people-fill"></i>IDPW教育の考え方・方法</a>&nbsp;
-			<a class="btn btn-primary btn-lg" href="#links" role="button"><i class="bi bi-link"></i>リンク集</a>&nbsp;
+			<h1 class="display-4"><i class="bi bi-shield-fill-exclamation"></i>第２章　セキュリティを学ぶ必要性<i class="bi bi-shield-fill-exclamation"></i></h1>
 			<p>
+			<a class="btn btn-primary btn-lg" href="#first" role="button">セキュリティポリシーについて</a>
+			</p><p>
+			<a class="btn btn-primary btn-lg" href="#second" role="button">学校におけるセキュリティ対策</a>
+			</p><p>
+			<a class="btn btn-primary btn-lg" href="#third" role="button">認証に関する基礎知識</a>
+			</p><p>
+			<a class="btn btn-primary btn-lg" href="#fourth" role="button">セキュリティ対策の大切さ</a>
+			</p><p>
+			<a class="btn btn-primary btn-lg" href="#fifth" role="button">多要素認証（スマホ）シミュレーター</a>
+			</p><p>
+			<a class="btn btn-primary btn-lg" href="#sixth" role="button">２章のまとめ</a>
 			</p>
 		</div>
-		本サイトは MIEE（マイクロソフト認定教育イノベーター）のETF「安全性、セキュリティ、およびプライバシー」チームにより製作されています。
 	</div>
 
 	<hr>
 
 	<div id="first" class="container">
-		<h2><i class="bi bi-magic"></i>はじめに<i class="bi bi-magic"></i></h2>
+		<h2>２−１　セキュリティの問題点と想定される危険</h2>
 		<div class="row">
-			<div class="col-sm-6">
-				コンテンツ<br>
-				<a href="#">リンク</a>
-			</div>
-			<div class="col-sm-6">
-				コンテンツ<br>
-				<a href="#">リンク</a>
+			<div class="col-sm-12">
+				<p>
+				　皆さんはご自身の学校及び自治体のセキュリティポリシーがどうなっているか、ご存知でしょうか。文部科学省は<a href="https://www.mext.go.jp/content/20220304-mxt_shuukyo01-100003157_1.pdf">「教育情報セキュリティポリシーに関するガイドライン（令和 4 年 3 月）」 （文部科学省のページに移動します）  </a>を公開しています。ここに記載されていることが国としてのセキュリティに関する基本的な考え方であります。一方、皆さんの自治体ではどうなっているでしょうか。 
+				</p><p>
+				　今回のガイドラインの改定に当たっては以下の点が大きく変わっています。 
+				<ol>
+				<li>校務用端末の詳細なセキュリティ対策
+					<ul>
+					<li>「リスクベース認証」、「ふるまい検知」、「マルウェア対策」、「暗号化」、「SSOの有効性」</li>
+					</ul>
+				</li><li>
+				校務用端末の使い分けについて
+					<ul>
+					<li>
+						ネットワーク分離による対策を講じたシステム構成の場合 
+						<ul>
+						<li>ネットワーク毎に複数の端末を使い分ける</li>
+						</ul>
+					</li><li>
+						アクセス制御による対策を講じたシステム構成の場合
+						<ul>
+						<li>アクセス制御を徹底することにより１台の端末で運用 </li>
+						</ul>
+					</li>
+					</ul>
+				</li><li>
+				校務用端末の持ち出しに関して
+					<ul>
+					<li>
+						ネットワーク分離による対策を講じたシステム構成の場合
+						<ul>
+						<li>安全管理に関して追加的な措置を定めた上で許可制とする</li>
+						</ul>
+					</li><li>
+						アクセス制御による対策を講じたシステム構成の場合
+						<ul>
+						<li>情報セキュリティ管理者の包括的承認等による持ち出しを検討する</li>
+						</ul>
+					</li>
+					</ul>
+				</li>
+				</ol>
+				</p>
 			</div>
 		</div>
 	</div><!-- #first -->
 
 	<hr>
 
-	<div id="security" class="container">
-		<h2><i class="bi bi-shield-fill-exclamation"></i>セキュリティを学ぶ必要性 <i class="bi bi-shield-fill-exclamation"></i></h2>
-		<div class="row">
-			<div class="col-sm-6">
-				コンテンツ<br>
-				<a href="#">リンク</a>
-			</div>
-			<div class="col-sm-6">
-				コンテンツ<br>
-				<a href="#">リンク</a>
-			</div>
-		</div>
-	</div><!-- #security -->
-	
-	<hr>
-
-	<div id="idpw" class="container">
-		<h2><i class="bi bi-key-fill"></i>IDPWの基本知識<i class="bi bi-key-fill"></i></h2>
-		<div class="row">
-			<div class="col-sm-6">
-				コンテンツ<br>
-				<a href="password">パスワードチェッカー</a>
-			</div>
-			<div class="col-sm-6">
-				コンテンツ<br>
-				<a href="#">リンク</a>
-			</div>
-		</div>
-	</div><!-- #idpw -->
-
-	<hr>
-
-	<div id="education" class="container">
-		<h2><i class="bi bi-people-fill"></i>IDPW教育の考え方・方法<i class="bi bi-people-fill"></i></h2>
-		<div class="row">
-			<div class="col-sm-6">
-				コンテンツ<br>
-				<a href="password">パスワードチェッカー</a>
-			</div>
-			<div class="col-sm-6">
-				コンテンツ<br>
-				<a href="multi-factor">多要素認証</a>
-			</div>
-		</div>
-	</div><!-- #ieducation-->
-
-	<hr>
-
-	<div id="links" class="container">
-		<h2><i class="bi bi-link"></i>リンク集<i class="bi bi-link"></i></h2>
+	<div id="second" class="container">
+		<h2>２−２　学校におけるセキュリティ対策</h2>
 		<div class="row">
 			<div class="col-sm-12">
-				<a href="https://www.ipa.go.jp/security/keihatsu/imakoso/">＃今こそ考えよう情報モラルセキュリティ ： IPA情報処理推進機構</a><br>
-				<a href="https://www.ipa.go.jp/security/keihatsu/munekyun-pw/index.html">パスワード－もっと強くキミを守りたい－ ： IPA情報処理推進機構</a><br>
-				<a href="#">リンク</a><br>
-				<a href="#">リンク</a><br>
-				<a href="#">リンク</a><br>
-				<a href="#">リンク</a><br>
-				<a href="#">リンク</a><br>
-				<a href="#">リンク</a><br>
-				<a href="#">リンク</a><br>
+				<p>
+				　一方で、皆さんの学校においてセキュリティ対策はどのようになっているでしょうか。多くの自治体でセキュリティチェックリストが公開されています。 
+				</p><p>
+				<a href="https://www.edu-ctr.pref.nagano.lg.jp/kjouhou/jousan/jouhou/shiryou/risk/checkseet.pdf">個人情報管理意識チェックシート（長野県教育委員会）（長野県総合教育センターのページに移動します。PDFファイルが開きます。）   </a>
+				</p><p>
+				<a href="https://compliancetraining.tokushima-ec.ed.jp/wysiwyg/file/download/1/104">セルフチェックシート (7) 情報セキュリティ（徳島県県立総合教育センターのページに移動します。） </a>
+				</p><p>
+				よく見かける光景として、こんな事がありませんか。 
+				<ul>
+				<li>デスクマットやPCにログインIDとパスワードが貼られている </li>
+				<li>離席時にPCの画面がそのまま</li>
+				<li>コピー機やプリンターなどに印刷物が置き去り</li>
+				</ul>
+				</p><p>
+				　これらに関しては、先に上げたチェックリストでも抵触する内容です。端的に言うと「銀行のキャッシュカード」と「印鑑」を多くの人の目につく場所に置いているということと同じなのです。どんなに強固なセキュリティ対策を行っても、これでは意味がありません。いわゆる「獅子身中の虫」に、期せずして何もセキュリティを考えていない教員がなってしまうことがあるのです。 
+				</p><p>
+				<strong>『セキュリティは何を守るのか』⇒個人情報などを含めた情報資産を守る </strong>
+				</p><p>
+				　ID（Identity）はあらゆるサービスにおいて、利用の可否を決定するものであり、セキュリティの基本になることを知りましょう。最近のクラウドなども併用する学校のネットワーク環境では、SSO（Single Sign On）やゼロトラストなども含めたセキュリティ対策を行っています。しかし、その中心となっているのはIDとパスワードです。 <br>
+				　我々は、IDを使って「認証」を行い、サービスを利用しています。認証とは簡単に言えば「門番が相手の身分（資格情報）を確認して、ゲートを通す」ということです。その際に、IDとパスワードの組み合わせを使って「本人確認」を行い、アクセス権限を付与してもらっているのです。 
+				　パスワードは、サイバー攻撃の高度化に伴い、それだけで安全性を確保するのが難しくなってきました。そこで登場してきたのが生体認証です。 
+				</p>
 			</div>
 		</div>
-	</div><!-- #ieducation-->
+	</div><!-- #second -->
+
+	<hr>
+
+	<div id="third" class="container">
+		<h2>２−３　認証に関する基礎知識</h2>
+		<div class="row">
+			<div class="col-sm-12">
+				<p>
+				　「認証」には大きく分けると「記憶（知識）」「所有物」「生体」の３つの「要素」があります。具体的な特徴は下記のとおりになっており、それぞれにメリット、デメリットがあります。  
+				</p>
+				<table class="table table-striped table-hover">
+				<tr>
+					<th>認証要素</th>
+					<th>特徴</th>
+					<th>メリット</th>
+					<th>デメリット</th>
+				</tr>
+				<tr>
+					<td>記憶（知識） </td>
+					<td>本人しか知り得ない記憶（＝知識情報）を基にした認証<br>
+						例）パスワード、暗証番号、PINコード <br>
+						　　母親の旧姓」や「飼っていたペットの名前」など
+					</td>
+					<td>低コスト<br>導入が容易</td>
+					<td>忘れることがある<br>簡単なものは類推が容易 </td>
+				</tr>
+				<tr>
+					<td>所有物（所持）  </td>
+					<td>所有しているものを使った認証<br>
+						例）スマートフォンを使ったSMS認証<br>
+						　　セキュリティ・トークンでの認証 
+					</td>
+					<td>所持することでセキュリティを担保 </td>
+					<td>認証用機器が必須<br>紛失時のコスト高<br>個人の管理が必要</td>
+				</tr>
+				<tr>
+					<td>生体 </td>
+					<td>本人の身体的特徴を使った認証<br>
+						例）指紋認証、顔認証、虹彩認証、静脈認証など
+					</td>
+					<td>成りすましが困難（＝セキュリティが高い）</td>
+					<td>認証用機器が必須<br>情報の変更ができない</td>
+				</tr>
+				</table>
+				<p>
+				　従来は、このうちの「記憶（知識）」が多く使われてきました。いわゆるIDとパスワードを使った認証がこの典型だと言えます。 
+				</p><p>
+				　一方で先程に例を挙げた銀行のキャッシュカードの例では、キャッシュカードを持っていることが所有物認証、その後の暗証番号が記憶認証になります。このように複数の認証要素を使って認証を行うことを「<strong>多要素認証</strong>」と言います。「多要素認証」を行うことで、セキュリティの強度が格段に上がります。そのため、アナログではありますがキャッシュカードやクレジットカード、銀行通帳を使った認証は「多要素認証」を有効に使ったものであると言えます。 
+				</p><p>
+				　現在のGIGAスクール構想の下では、一般的にはIDとパスワードのみの場合と、そこにSMS認証などを組み合わせた多要素認証が多いと思われますが、今後はより安全性の高い他の要素を使った認証も増えていくかもしれません。
+				</p>
+			</div>
+		</div>
+	</div><!-- #third -->
+
+	<hr>
+
+	<div id="fourth" class="container">
+		<h2>２−４　セキュリティ対策の大切さ</h2>
+		<div class="row">
+			<div class="col-sm-12">
+				<p>
+				　なぜ、こんなにセキュリティ対策、認証が大切なのでしょう？それは、これからの学習活動、そして社会生活全般においてIDの重要性が高まっているからです。自らが持つ、アクセスできる情報資産の価値が飛躍的に高まっています。また、多くのサービスを使って、学習者及び教育者は自らの情報資産の価値を高めているのが、現状であるといえます。 
+				</p><p>
+				　しかし、複数のサービスを横断的に使うということは、同時に複数のIDを所有することになります。そのためID及びパスワードの管理の煩雑さが問題になってきています。多くのサービスが群雄割拠している昨今の社会情勢において、別々にIDとパスワードなどを用意することが可能でしょうか。できると思いますが、その手間と労力を考えると一つのIDとパスワードを使いまわしたくなるのが現実です。 
+				</p><p>
+				　その仕組として考えられているのが<strong>SSO(Single Sign On)</strong>というものです。SSOは１度の認証を行うことで、紐づいている複数のサービスの認証を行ってしまうものです。ネットワークを経由して「認証できたという結果のみ」をやり取りするものであり、パスワードなどの認証情報は含まれないので、安全性が高く、かつ利便性が高いため多くの学習用eポータルなどで利用されています。 
+				</p>
+				<p>
+				代表的なSSOを利用した学習用eポータル 
+				<ul>
+					<li>L-Gate</li>
+					<li>まなびポケット</li>
+					<li>OPE (Open Platform for Education）</li>
+					<li>Studyplus for School</li>
+					<li>Qubena</li>
+					<li>みらeポータル</li>
+					<li>tomoLinks</li>
+				</ul>
+				</p><p>
+				　一つの認証で全てのサービスにアクセスできてしまうので、だからこそ堅牢性を格段に高めるために生体認証を中心とした「多要素認証」が重要となってくるのです。自らを守る、子どもたちを守る、社会を守るための『基礎基本』『当たり前のこと』としてセキュリティ対策、つまり意識的に「多要素認証」を取り入れていくことが大切になるのです。 
+				</p>
+			</div>
+		</div>
+	</div><!-- #fourth -->
+
+	<hr>
+
+	<div id="fifth" class="container">
+		<h2>２−５　多要素認証（スマホ）シミュレーター</h2>
+		<div class="row">
+			<div class="col-sm-12">
+				<p>
+				　多要素認証は色々な種類がありますが、もっとも身近になるであろうスマホでの多要素認証のシミュレーターを用意しました。以下のリンクから体験してみてください。
+				</p><p>
+				　<a href="multi-factor/index.html">多要素認証シミュレーター</a>
+				</p>
+			</div>
+		</div>
+	</div><!-- #fifth -->
+
+	<hr>
+
+	<div id="sixth" class="container">
+		<h2>２−６　２章のまとめ</h2>
+		<div class="row">
+			<div class="col-sm-12">
+				<p>
+				　この章では、次のことを行いました。 
+				</p>
+				<ul>
+				<li>文部科学省の「教育情報セキュリティポリシーに関するガイドライン（令和 4 年 3 月）」 の概要を学んだ。</li>
+				<li>学校のセキュリティ対策の方法で、セキュリティチェックリストが用いられていることを学んだ。</li>
+				<li>認証に関する基本的な知識を学んだ。 </li>
+				<li>セキュリティ対策の大切さについて考えた。</li>
+				<li>多要素認証が広く利用されていることを学んだ。 </li>
+				<li>多要素認証を疑似体験した。</li>
+				</ul>
+			</div>
+		</div>
+	</div><!-- #sixth -->
 
 	</article>
 
